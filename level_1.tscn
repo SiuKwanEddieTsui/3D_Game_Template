@@ -106,3 +106,7 @@ mesh = SubResource("PrismMesh_khb5x")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prism"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.36217, 0.278435, 2.2037)
 shape = SubResource("BoxShape3D_o7fw1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
