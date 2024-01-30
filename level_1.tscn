@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=3 uid="uid://bgjxqnbwa01lc"]
+
+[ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_4vkqj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jbg24"]
+size = Vector3(30, 0.2, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqw6h"]
+albedo_color = Color(0.215686, 0.231373, 0.235294, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wvpix"]
+size = Vector3(30, 0.2, 30)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8j0wt"]
+height = 5.0
+radial_segments = 8
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mnuv5"]
+albedo_color = Color(0.501961, 0.329412, 0.0666667, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sjdr3"]
+albedo_color = Color(0.211765, 0.498039, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_f0tee"]
+material = SubResource("StandardMaterial3D_sjdr3")
+radius = 3.0
+height = 3.0
+radial_segments = 8
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4jnk8"]
+albedo_color = Color(0.513726, 0.513726, 0.513726, 1)
+emission_enabled = true
+emission = Color(0, 0.929412, 0.929412, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_or4ap"]
+albedo_color = Color(0, 0.858824, 0.168627, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_khb5x"]
+material = SubResource("StandardMaterial3D_or4ap")
+subdivide_width = 4
+subdivide_height = 4
+subdivide_depth = 4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o7fw1"]
+
+[node name="Level 1" type="Node3D"]
+metadata/_edit_lock_ = true
+
+[node name="Ground" type="StaticBody3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("BoxMesh_jbg24")
+surface_material_override/0 = SubResource("StandardMaterial3D_uqw6h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_wvpix")
+
+[node name="tree" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0304956, 0)
+
+[node name="Trunk" type="StaticBody3D" parent="tree"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57084, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="tree/Trunk"]
+mesh = SubResource("CylinderMesh_8j0wt")
+surface_material_override/0 = SubResource("StandardMaterial3D_mnuv5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tree/Trunk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+
+[node name="Leaves" type="MeshInstance3D" parent="tree"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.89794, 0)
+mesh = SubResource("SphereMesh_f0tee")
+
+[node name="tree2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0304956, 6.97978)
+
+[node name="Trunk" type="StaticBody3D" parent="tree2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57084, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="tree2/Trunk"]
+mesh = SubResource("CylinderMesh_8j0wt")
+surface_material_override/0 = SubResource("StandardMaterial3D_mnuv5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tree2/Trunk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+
+[node name="Leaves" type="MeshInstance3D" parent="tree2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.89794, 0)
+mesh = SubResource("SphereMesh_f0tee")
+
+[node name="Player" parent="tree2" instance=ExtResource("1_4vkqj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.84054, 1.37772, 0)
+
+[node name="Prism" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prism"]
+transform = Transform3D(0.971067, -0.237236, 0.0273543, 0.23484, 0.969441, 0.0709576, -0.0433521, -0.0624807, 0.997104, 4.60657, 0.43842, 2.35927)
+material_override = SubResource("StandardMaterial3D_4jnk8")
+mesh = SubResource("PrismMesh_khb5x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prism"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.36217, 0.278435, 2.2037)
+shape = SubResource("BoxShape3D_o7fw1")
