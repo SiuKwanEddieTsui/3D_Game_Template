@@ -18,12 +18,11 @@ config/icon="res://icon.png"
 [display]
 
 window/size/resizable=false
-window/dpi/allow_hidpi=false
 window/size/fullscreen=true
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/csg_mesher/plugin.cfg")
 
 [gui]
 
