@@ -1,8 +1,12 @@
-[gd_scene load_steps=60 format=3 uid="uid://bgjxqnbwa01lc"]
+[gd_scene load_steps=62 format=3 uid="uid://bgjxqnbwa01lc"]
 
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_4vkqj"]
+[ext_resource type="PackedScene" uid="uid://bsvo0haob0w7t" path="res://pigeon.glb" id="1_fl8rc"]
 [ext_resource type="PackedScene" uid="uid://buop3rxr2eopd" path="res://Scenes/Components/tree.tscn" id="2_3y2d8"]
 [ext_resource type="Script" path="res://addons/csg_mesher/src/CSGMesher.gd" id="3_e68ao"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6rrn7"]
+points = PackedVector3Array(-370.179, 40.5739, 159.065, -370.085, 42.1887, 155.161, -330.987, 22.0055, 148.855, -372.597, 19.4957, 127.426, -411.695, 24.5321, 148.855, -375.117, -0.687431, 140.035, -375.117, -0.687431, 152.639, -372.597, 34.6216, 163.992, -367.565, -0.687431, 140.035, -411.695, 22.0055, 151.376, -367.565, -0.687431, 152.639, -330.987, 24.5321, 151.376, -369.053, 16.1602, 127.853, -330.987, 24.5321, 148.855, -373.629, 16.16, 127.852, -411.695, 22.0055, 148.855, -378.901, -0.687431, 150.117, -372.597, 37.1439, 163.992, -372.597, 42.1887, 155.161, -330.987, 22.0055, 151.376, -363.78, -0.687431, 150.117, -370.085, 19.4957, 127.426, -370.085, 34.6216, 163.992, -411.695, 24.5321, 151.376, -370.085, 37.1439, 163.992, -363.78, -0.687431, 147.596, -378.901, -0.687431, 147.596, -372.502, 40.5746, 159.065, -368.829, 40.9254, 153.898, -373.853, 40.9254, 153.898, -372.452, 15.1737, 128.345, -370.23, 15.1737, 128.345)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mnaxh"]
 albedo_color = Color(0, 0.894118, 0.823529, 1)
@@ -234,6 +238,18 @@ points = PackedVector3Array(-0.000195742, -4.89354e-05, -1, -0.000195742, 0.0487
 
 [node name="Level 1" type="Node3D"]
 metadata/_edit_lock_ = true
+
+[node name="pigeon" parent="." instance=ExtResource("1_fl8rc")]
+transform = Transform3D(-0.275537, 0, 0.96129, 0, 1, 0, -0.96129, 0, -0.275537, -18.5496, 11.6485, 26.459)
+
+[node name="Pigeon_Body_Texture_100Animals_SG_0" parent="pigeon/Sketchfab_Scene/Sketchfab_model/4eed55ce474d4347b1662d5396a91076_fbx/RootNode/Mesh_Birds/Pigeon/Pigeon_Body" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="pigeon/Sketchfab_Scene/Sketchfab_model/4eed55ce474d4347b1662d5396a91076_fbx/RootNode/Mesh_Birds/Pigeon/Pigeon_Body/Pigeon_Body_Texture_100Animals_SG_0" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pigeon/Sketchfab_Scene/Sketchfab_model/4eed55ce474d4347b1662d5396a91076_fbx/RootNode/Mesh_Birds/Pigeon/Pigeon_Body/Pigeon_Body_Texture_100Animals_SG_0/StaticBody3D"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_6rrn7")
 
 [node name="Arch" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2233, 14.2903, -16.3694)
@@ -569,14 +585,6 @@ shape = SubResource("BoxShape3D_ge25m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.1657, -50.3879)
 shape = SubResource("BoxShape3D_ge25m")
 
-[node name="sculpture" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.4528, 12.1022, 28.5336)
-
-[node name="CSGMesher" type="CSGCombiner3D" parent="sculpture"]
-script = ExtResource("3_e68ao")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="sculpture/CSGMesher"]
-
 [node name="Rings" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2898, 5.94607, 14.1837)
 
@@ -650,3 +658,5 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vyqm5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Rings/Ring6/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_nt2wk")
+
+[editable path="pigeon"]
