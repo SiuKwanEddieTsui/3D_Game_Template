@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dayxjai01uxhn"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_3c384"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_fh4sa"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_igo1s"]
+
+[node name="Ghost" type="CharacterBody3D" groups=["enemies"]]
+script = ExtResource("1_3c384")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(90, 0, 0, 0, 90, 0, 0, 0, 90, -0.13739, 0.524566, -0.251491)
+mesh = SubResource("TorusMesh_fh4sa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(90, 0, 0, 0, 90, 0, 0, 0, 90, -0.13739, 0.524566, -0.251491)
+shape = SubResource("SphereShape3D_igo1s")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

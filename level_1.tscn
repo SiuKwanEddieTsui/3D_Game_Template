@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://bgjxqnbwa01lc"]
+[gd_scene load_steps=77 format=3 uid="uid://bgjxqnbwa01lc"]
 
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_4vkqj"]
 [ext_resource type="PackedScene" uid="uid://o6d5wnjrrxs" path="res://pigeon.glb" id="1_qc7lr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://b7st3o5jvnu23" path="res://Materials/GreenGrid.tres" id="3_j0rpj"]
 [ext_resource type="Texture2D" uid="uid://cmj0adv4q81mr" path="res://Textures/Ultimate_Skies_4k_0069_sm.exr" id="5_ywnym"]
 [ext_resource type="Script" path="res://RespawnMesh.gd" id="6_nxx8h"]
+[ext_resource type="Script" path="res://Collectibles.gd" id="8_splkv"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c6j5r"]
 points = PackedVector3Array(-370.179, 40.5739, 159.065, -370.085, 42.1887, 155.161, -330.987, 22.0055, 148.855, -372.597, 19.4957, 127.426, -411.695, 24.5321, 148.855, -375.117, -0.687431, 140.035, -375.117, -0.687431, 152.639, -372.597, 34.6216, 163.992, -367.565, -0.687431, 140.035, -411.695, 22.0055, 151.376, -367.565, -0.687431, 152.639, -330.987, 24.5321, 151.376, -369.053, 16.1602, 127.853, -330.987, 24.5321, 148.855, -373.629, 16.16, 127.852, -411.695, 22.0055, 148.855, -378.901, -0.687431, 150.117, -372.597, 37.1439, 163.992, -372.597, 42.1887, 155.161, -330.987, 22.0055, 151.376, -363.78, -0.687431, 150.117, -370.085, 19.4957, 127.426, -370.085, 34.6216, 163.992, -411.695, 24.5321, 151.376, -370.085, 37.1439, 163.992, -363.78, -0.687431, 147.596, -378.901, -0.687431, 147.596, -372.502, 40.5746, 159.065, -368.829, 40.9254, 153.898, -373.853, 40.9254, 153.898, -372.452, 15.1737, 128.345, -370.23, 15.1737, 128.345)
@@ -282,6 +283,18 @@ points = PackedVector3Array(-0.977441, 0.0497648, -0.183127, 0.977439, 0.0497671
 [sub_resource type="BoxShape3D" id="BoxShape3D_ag0kq"]
 size = Vector3(2000, 50, 2000)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_uc05h"]
+radius = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_1qkj3"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sp42w"]
+albedo_color = Color(1, 1, 0.32549, 0.992157)
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 10.89
+
 [node name="Level 1" type="Node3D"]
 metadata/_edit_lock_ = true
 
@@ -491,7 +504,7 @@ environment = SubResource("Environment_gvekp")
 camera_attributes = SubResource("CameraAttributesPhysical_n10qv")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.984939, 0.0562445, 0.163497, 0.00540239, -0.935138, 0.354242, 0.172816, 0.34979, 0.92075, -1.16941, 7.96405, 22.4144)
+transform = Transform3D(-0.984939, 0.0562444, 0.163497, 0.00540239, -0.935138, 0.354242, 0.172816, 0.34979, 0.92075, -1.16941, 7.96405, 22.4144)
 light_energy = 0.7
 light_indirect_energy = 0.5
 light_volumetric_fog_energy = 0.5
@@ -602,6 +615,18 @@ physics_material_override = SubResource("PhysicsMaterial_7dl1v")
 mesh = SubResource("BoxMesh_8t7wi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Blocks/Block/StaticBody3D"]
+shape = SubResource("BoxShape3D_y65st")
+
+[node name="Block3" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.3181, 12.5838, 34.6897)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Blocks/Block3"]
+physics_material_override = SubResource("PhysicsMaterial_7dl1v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Blocks/Block3/StaticBody3D"]
+mesh = SubResource("BoxMesh_8t7wi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Blocks/Block3/StaticBody3D"]
 shape = SubResource("BoxShape3D_y65st")
 
 [node name="Block2" type="Node3D" parent="Blocks"]
@@ -748,6 +773,191 @@ respawn_point = NodePath("../PlayerRespawnPoint")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.1146, 0)
 shape = SubResource("BoxShape3D_ag0kq")
 
+[node name="collectibles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12928, -34.1099, -0.18047)
+
+[node name="Collectibles" type="Area3D" parent="collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1355, 45.0724, -14.9013)
+script = ExtResource("8_splkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collectibles/Collectibles"]
+transform = Transform3D(0.999999, -0.000241314, 0.00165542, 0.000252972, 0.999975, -0.00704701, -0.00165368, 0.00704742, 0.999974, 0, 0, 0)
+shape = SubResource("SphereShape3D_uc05h")
+
+[node name="Apple" type="MeshInstance3D" parent="collectibles/Collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
+mesh = SubResource("BoxMesh_1qkj3")
+surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
+[node name="Collectibles2" type="Area3D" parent="collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.1227, 45.0724, -14.9013)
+script = ExtResource("8_splkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collectibles/Collectibles2"]
+transform = Transform3D(0.999999, -0.000241314, 0.00165542, 0.000252972, 0.999975, -0.00704701, -0.00165368, 0.00704742, 0.999974, 0, 0, 0)
+shape = SubResource("SphereShape3D_uc05h")
+
+[node name="Apple" type="MeshInstance3D" parent="collectibles/Collectibles2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
+mesh = SubResource("BoxMesh_1qkj3")
+surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
+[node name="Collectibles3" type="Area3D" parent="collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.39898, 45.0724, -14.9013)
+script = ExtResource("8_splkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collectibles/Collectibles3"]
+transform = Transform3D(0.999999, -0.000241314, 0.00165542, 0.000252972, 0.999975, -0.00704701, -0.00165368, 0.00704742, 0.999974, 0, 0, 0)
+shape = SubResource("SphereShape3D_uc05h")
+
+[node name="Apple" type="MeshInstance3D" parent="collectibles/Collectibles3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
+mesh = SubResource("BoxMesh_1qkj3")
+surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
+[node name="Collectibles4" type="Area3D" parent="collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.11607, 45.0724, -14.9013)
+script = ExtResource("8_splkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collectibles/Collectibles4"]
+transform = Transform3D(0.999999, -0.000241314, 0.00165542, 0.000252972, 0.999975, -0.00704701, -0.00165368, 0.00704742, 0.999974, 0, 0, 0)
+shape = SubResource("SphereShape3D_uc05h")
+
+[node name="Apple" type="MeshInstance3D" parent="collectibles/Collectibles4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
+mesh = SubResource("BoxMesh_1qkj3")
+surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
+[node name="Collectibles5" type="Area3D" parent="collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.66243, 43.0283, -17.1855)
+script = ExtResource("8_splkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collectibles/Collectibles5"]
+transform = Transform3D(0.999999, -0.000241314, 0.00165542, 0.000252972, 0.999975, -0.00704701, -0.00165368, 0.00704742, 0.999974, 0, 0, 0)
+shape = SubResource("SphereShape3D_uc05h")
+
+[node name="Apple" type="MeshInstance3D" parent="collectibles/Collectibles5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
+mesh = SubResource("BoxMesh_1qkj3")
+surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
+[node name="Collectibles6" type="Area3D" parent="collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.83771, 40.1143, -10.0556)
+script = ExtResource("8_splkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collectibles/Collectibles6"]
+transform = Transform3D(0.999999, -0.000241314, 0.00165542, 0.000252972, 0.999975, -0.00704701, -0.00165368, 0.00704742, 0.999974, 0, 0, 0)
+shape = SubResource("SphereShape3D_uc05h")
+
+[node name="Apple" type="MeshInstance3D" parent="collectibles/Collectibles6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
+mesh = SubResource("BoxMesh_1qkj3")
+surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
+[node name="Collectibles7" type="Area3D" parent="collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88159, 38.0841, -4.0434)
+script = ExtResource("8_splkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collectibles/Collectibles7"]
+transform = Transform3D(0.999999, -0.000241314, 0.00165542, 0.000252972, 0.999975, -0.00704701, -0.00165368, 0.00704742, 0.999974, 0, 0, 0)
+shape = SubResource("SphereShape3D_uc05h")
+
+[node name="Apple" type="MeshInstance3D" parent="collectibles/Collectibles7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
+mesh = SubResource("BoxMesh_1qkj3")
+surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
+[node name="Collectibles8" type="Area3D" parent="collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5835, 41.1532, 14.2791)
+script = ExtResource("8_splkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collectibles/Collectibles8"]
+transform = Transform3D(0.999999, -0.000241314, 0.00165542, 0.000252972, 0.999975, -0.00704701, -0.00165368, 0.00704742, 0.999974, 0, 0, 0)
+shape = SubResource("SphereShape3D_uc05h")
+
+[node name="Apple" type="MeshInstance3D" parent="collectibles/Collectibles8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
+mesh = SubResource("BoxMesh_1qkj3")
+surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
+[node name="Collectibles9" type="Area3D" parent="collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3952, 42.3491, 19.4183)
+script = ExtResource("8_splkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collectibles/Collectibles9"]
+transform = Transform3D(0.999999, -0.000241314, 0.00165542, 0.000252972, 0.999975, -0.00704701, -0.00165368, 0.00704742, 0.999974, 0, 0, 0)
+shape = SubResource("SphereShape3D_uc05h")
+
+[node name="Apple" type="MeshInstance3D" parent="collectibles/Collectibles9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
+mesh = SubResource("BoxMesh_1qkj3")
+surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
+[node name="Collectibles10" type="Area3D" parent="collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03613, 43.5012, 23.7846)
+script = ExtResource("8_splkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collectibles/Collectibles10"]
+transform = Transform3D(0.999999, -0.000241314, 0.00165542, 0.000252972, 0.999975, -0.00704701, -0.00165368, 0.00704742, 0.999974, 0, 0, 0)
+shape = SubResource("SphereShape3D_uc05h")
+
+[node name="Apple" type="MeshInstance3D" parent="collectibles/Collectibles10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
+mesh = SubResource("BoxMesh_1qkj3")
+surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
+[node name="Collectibles11" type="Area3D" parent="collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60779, 44.6707, 25.5648)
+script = ExtResource("8_splkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collectibles/Collectibles11"]
+transform = Transform3D(0.999999, -0.000241314, 0.00165542, 0.000252972, 0.999975, -0.00704701, -0.00165368, 0.00704742, 0.999974, 0, 0, 0)
+shape = SubResource("SphereShape3D_uc05h")
+
+[node name="Apple" type="MeshInstance3D" parent="collectibles/Collectibles11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
+mesh = SubResource("BoxMesh_1qkj3")
+surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
+[node name="Collectibles12" type="Area3D" parent="collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.65594, 47.0233, 27.8446)
+script = ExtResource("8_splkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collectibles/Collectibles12"]
+transform = Transform3D(0.999999, -0.000241314, 0.00165542, 0.000252972, 0.999975, -0.00704701, -0.00165368, 0.00704742, 0.999974, 0, 0, 0)
+shape = SubResource("SphereShape3D_uc05h")
+
+[node name="Apple" type="MeshInstance3D" parent="collectibles/Collectibles12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
+mesh = SubResource("BoxMesh_1qkj3")
+surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
+[node name="Collectibles13" type="Area3D" parent="collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.46167, 48.5338, 27.8608)
+script = ExtResource("8_splkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collectibles/Collectibles13"]
+transform = Transform3D(0.999999, -0.000241314, 0.00165542, 0.000252972, 0.999975, -0.00704701, -0.00165368, 0.00704742, 0.999974, 0, 0, 0)
+shape = SubResource("SphereShape3D_uc05h")
+
+[node name="Apple" type="MeshInstance3D" parent="collectibles/Collectibles13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
+mesh = SubResource("BoxMesh_1qkj3")
+surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
 [connection signal="body_entered" from="RespawnMesh" to="RespawnMesh" method="_on_body_entered"]
+[connection signal="body_entered" from="collectibles/Collectibles" to="collectibles/Collectibles" method="_on_body_entered"]
+[connection signal="body_entered" from="collectibles/Collectibles2" to="collectibles/Collectibles2" method="_on_body_entered"]
+[connection signal="body_entered" from="collectibles/Collectibles3" to="collectibles/Collectibles3" method="_on_body_entered"]
+[connection signal="body_entered" from="collectibles/Collectibles4" to="collectibles/Collectibles4" method="_on_body_entered"]
+[connection signal="body_entered" from="collectibles/Collectibles5" to="collectibles/Collectibles5" method="_on_body_entered"]
+[connection signal="body_entered" from="collectibles/Collectibles6" to="collectibles/Collectibles6" method="_on_body_entered"]
+[connection signal="body_entered" from="collectibles/Collectibles7" to="collectibles/Collectibles7" method="_on_body_entered"]
+[connection signal="body_entered" from="collectibles/Collectibles8" to="collectibles/Collectibles8" method="_on_body_entered"]
+[connection signal="body_entered" from="collectibles/Collectibles9" to="collectibles/Collectibles9" method="_on_body_entered"]
+[connection signal="body_entered" from="collectibles/Collectibles10" to="collectibles/Collectibles10" method="_on_body_entered"]
+[connection signal="body_entered" from="collectibles/Collectibles11" to="collectibles/Collectibles11" method="_on_body_entered"]
+[connection signal="body_entered" from="collectibles/Collectibles12" to="collectibles/Collectibles12" method="_on_body_entered"]
+[connection signal="body_entered" from="collectibles/Collectibles13" to="collectibles/Collectibles13" method="_on_body_entered"]
 
 [editable path="pigeon"]
