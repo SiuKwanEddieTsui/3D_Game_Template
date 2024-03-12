@@ -35,6 +35,8 @@ mesh = SubResource("CylinderMesh_ix326")
 surface_material_override/0 = SubResource("StandardMaterial3D_psk40")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Trunk"]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Trunk/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_lfv5r")
@@ -45,6 +47,8 @@ mesh = SubResource("SphereMesh_vll6a")
 surface_material_override/0 = SubResource("StandardMaterial3D_8e2wi")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="leaves"]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="leaves/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_vdpj4")
