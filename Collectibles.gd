@@ -4,7 +4,7 @@ var is_collected = false
 
 
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	# when player enters
 	# increment apple count by 1
 	global.apple_count = global.apple_count + 1
