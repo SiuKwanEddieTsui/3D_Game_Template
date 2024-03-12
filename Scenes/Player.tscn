@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b0q0bnia378s4"]
 
 [ext_resource type="Script" path="res://Scripts/FirstPersonController.gd" id="1_qtton"]
-[ext_resource type="Script" path="res://Scripts/Pickup.gd" id="2_y6sbl"]
+[ext_resource type="Script" path="res://Scenes/PickupArea2.gd" id="2_tj4jw"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wm1ia"]
 
@@ -24,14 +24,14 @@ shape = SubResource("CapsuleShape3D_ry65h")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.1, 2.08165e-12)
 
 [node name="PickupArea" type="Area3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.605158, -1.11332)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.605158, -1.11179)
 collision_layer = 16
 collision_mask = 8
-script = ExtResource("2_y6sbl")
+script = ExtResource("2_tj4jw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera/PickupArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0452598, -0.4879, -0.454686)
 shape = SubResource("BoxShape3D_4b780")
 
 [node name="hand" type="Marker3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0452598, -1.09306, -1.76929)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0689616, -1.10791, -1.94373)
