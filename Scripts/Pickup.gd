@@ -18,12 +18,14 @@ func _unhandled_input(_event):
 			is_picked = false
 		else:
 			is_picked = true
+			$"../../pickup".play()
 	
 	if (Input.is_action_just_pressed("throw")) and picked_object and is_picked:
 		var dir = -camera.global_transform.basis.z.normalized() + Vector3(0, 1, 0)
 		picked_object.apply_central_impulse(dir * 10)
 		picked_object = null
 		is_picked = false
+		$"../../throw".play()
 
 func _on_body_entered(body):
 	if picked_object and is_picked:

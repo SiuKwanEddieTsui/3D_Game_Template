@@ -72,6 +72,8 @@ func _jump(delta: float) -> Vector3:
 	if jumping:
 		if is_on_floor(): jump_vel = Vector3(0, sqrt(4 * jump_height * gravity), 0)
 		jumping = false
+		$jump.play()
 		return jump_vel
 	jump_vel = Vector3.ZERO if is_on_floor() else jump_vel.move_toward(Vector3.ZERO, gravity * delta)
 	return jump_vel
+	

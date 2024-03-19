@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxmxeg5w86lmc"]
+[gd_scene load_steps=6 format=3 uid="uid://cxmxeg5w86lmc"]
 
 [ext_resource type="Script" path="res://Collectibles.gd" id="1_vuu4d"]
+[ext_resource type="AudioStream" uid="uid://cgj30rh4o6sg6" path="res://Sounds/Pickup_coin 1.wav" id="2_fjim3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uc05h"]
 radius = 0.2
@@ -17,7 +18,6 @@ emission_energy_multiplier = 10.89
 [node name="Collectibles" type="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1355, 45.0724, -14.9013)
 collision_layer = 4
-collision_mask = 4
 script = ExtResource("1_vuu4d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -28,5 +28,9 @@ shape = SubResource("SphereShape3D_uc05h")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 9.53674e-07, 0)
 mesh = SubResource("BoxMesh_1qkj3")
 surface_material_override/0 = SubResource("StandardMaterial3D_sp42w")
+
+[node name="collect" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_fjim3")
+volume_db = -1.524
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -20,6 +20,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("picked") and picked_object:
 		is_picked = not is_picked
 		if not is_picked and picked_object:
+			$"../../pickup".play()
 			picked_object.linear_velocity = Vector3.ZERO
 			picked_object.angular_velocity = Vector3.ZERO
 			picked_object = null

@@ -11,4 +11,5 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func update_target_location(target_location):
+	print('target_location', target_location)
 	nav_agent.set_target_position(target_location)
