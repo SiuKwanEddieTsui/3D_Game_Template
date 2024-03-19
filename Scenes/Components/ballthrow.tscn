@@ -1,18 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cs1qopogbgq88"]
+[gd_scene load_steps=5 format=3 uid="uid://qjfnxb81bywk"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ufnwo"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_i7sge"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_roxil"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4jnk8"]
 albedo_color = Color(0.513726, 0.513726, 0.513726, 1)
 emission_enabled = true
 emission = Color(0, 0.929412, 0.929412, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_rygx8"]
+[sub_resource type="SphereMesh" id="SphereMesh_45u4u"]
 
-[node name="Cube" type="Node3D"]
-transform = Transform3D(0.971067, -0.237236, 0.0273543, 0.23484, 0.969441, 0.0709576, -0.0433521, -0.0624807, 0.997104, 7.05296, 14.866, -14.9439)
+[node name="ball" type="Node3D"]
+transform = Transform3D(0.971067, -0.237236, 0.0273543, 0.23484, 0.969441, 0.0709576, -0.0433521, -0.0624807, 0.997104, -21.9811, 14.866, -14.9439)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(0.971067, 0.23484, -0.0433521, -0.237236, 0.96944, -0.0624807, 0.0273543, 0.0709576, 0.997104, -4.47397, 0.815231, -2.50956)
@@ -22,10 +22,10 @@ physics_material_override = SubResource("PhysicsMaterial_ufnwo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(0.971067, -0.237236, 0.0273543, 0.23484, 0.969441, 0.0709577, -0.0433521, -0.0624807, 0.997104, 4.60657, 0.438421, 2.35927)
-shape = SubResource("BoxShape3D_i7sge")
+shape = SubResource("SphereShape3D_roxil")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 transform = Transform3D(0.971067, -0.237236, 0.0273543, 0.23484, 0.969441, 0.0709577, -0.0433521, -0.0624807, 0.997104, 4.60657, 0.438421, 2.35927)
 material_override = SubResource("StandardMaterial3D_4jnk8")
-mesh = SubResource("BoxMesh_rygx8")
+mesh = SubResource("SphereMesh_45u4u")
 skeleton = NodePath("")
