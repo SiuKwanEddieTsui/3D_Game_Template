@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/FirstPersonController.gd" id="1_qtton"]
 [ext_resource type="Script" path="res://Scripts/Pickup.gd" id="2_ixhse"]
-[ext_resource type="AudioStream" uid="uid://bg1wc1jbid388" path="res://Sounds/Jump 1.wav" id="3_rydab"]
-[ext_resource type="AudioStream" uid="uid://ve8rx5c6lyyg" path="res://Sounds/Laser_shoot 1.wav" id="4_ye0h8"]
-[ext_resource type="AudioStream" uid="uid://ci3gq155bg35x" path="res://Sounds/Pickup_coin 2.wav" id="5_bo5lm"]
+[ext_resource type="AudioStream" uid="uid://coqi2s4lk054g" path="res://Sounds/Jump 1.wav" id="3_rydab"]
+[ext_resource type="AudioStream" uid="uid://bu7e53uu4vjcc" path="res://Sounds/Laser_shoot 1.wav" id="4_ye0h8"]
+[ext_resource type="AudioStream" uid="uid://btb1sucy4t841" path="res://Sounds/Pickup_coin 2.wav" id="5_bo5lm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wm1ia"]
 
@@ -53,3 +53,4 @@ stream = ExtResource("4_ye0h8")
 [node name="walk" type="AudioStreamPlayer3D" parent="."]
 
 [connection signal="body_entered" from="Camera/PickupArea" to="Camera/PickupArea" method="_on_body_entered"]
+[connection signal="body_exited" from="Camera/PickupArea" to="Camera/PickupArea" method="_on_body_exited"]

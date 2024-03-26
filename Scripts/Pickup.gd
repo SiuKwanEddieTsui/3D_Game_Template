@@ -5,6 +5,8 @@ extends Area3D
 var picked_object = null
 var is_picked = false
 
+signal update_console
+
 func _physics_process(_delta):
 	if picked_object and is_picked:
 		var a = picked_object.global_transform.origin
@@ -13,6 +15,7 @@ func _physics_process(_delta):
 
 func _unhandled_input(_event):
 	if (Input.is_action_just_pressed("picked")) and picked_object:
+		emit_signal("update_console", "")
 		if is_picked:
 			picked_object = null
 			is_picked = false
@@ -31,4 +34,9 @@ func _on_body_entered(body):
 	if picked_object and is_picked:
 		return
 	picked_object = body
+	emit_signal("update_console", "Press F to pickup objects")
 	
+
+
+func _on_body_exited(body):
+	emit_signal("update_console", "")

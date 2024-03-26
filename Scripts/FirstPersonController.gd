@@ -77,3 +77,5 @@ func _jump(delta: float) -> Vector3:
 	jump_vel = Vector3.ZERO if is_on_floor() else jump_vel.move_toward(Vector3.ZERO, gravity * delta)
 	return jump_vel
 	
+func play_pickup_sound():
+	$pickup.play()
