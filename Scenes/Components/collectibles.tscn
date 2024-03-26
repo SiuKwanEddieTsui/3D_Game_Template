@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cxmxeg5w86lmc"]
 
 [ext_resource type="Script" path="res://Collectibles.gd" id="1_vuu4d"]
-[ext_resource type="AudioStream" uid="uid://dhjdyq4dujxtm" path="res://Sounds/Pickup_coin 1.wav" id="2_fjim3"]
+[ext_resource type="AudioStream" uid="uid://cgj30rh4o6sg6" path="res://Sounds/Pickup_coin 1.wav" id="2_fjim3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uc05h"]
 radius = 0.2

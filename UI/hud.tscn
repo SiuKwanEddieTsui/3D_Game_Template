@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://5j1a8430y5nv"]
 
-[ext_resource type="Texture2D" uid="uid://cf20ewc0o03q0" path="res://Textures/boxicon.png" id="1_1lmyt"]
+[ext_resource type="Texture2D" uid="uid://bi5x8qwmbciy8" path="res://Textures/boxicon.png" id="1_1lmyt"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -21,6 +21,7 @@ texture = ExtResource("1_1lmyt")
 
 [node name="AppleCount" type="Label" parent="CenterContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="CenterContainer2" type="CenterContainer" parent="."]
 layout_mode = 1
