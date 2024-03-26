@@ -891,9 +891,10 @@ collision_mask = 0
 [node name="Physics objects" type="Node3D" parent="."]
 
 [node name="ball" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3074, 9.3298, -13.2338)
 
 [node name="ball2" parent="Physics objects" instance=ExtResource("11_2mjts")]
-transform = Transform3D(0.971067, -0.237236, 0.0273543, 0.23484, 0.969441, 0.0709576, -0.0433521, -0.0624807, 0.997104, 12.7744, 3.445, -6.41172)
+transform = Transform3D(0.969669, -0.238733, 0.0524378, 0.23484, 0.969441, 0.0709576, -0.0677753, -0.0564909, 0.9961, -17.0322, 11.5291, -13.3905)
 
 [node name="ball3" parent="Physics objects" instance=ExtResource("11_2mjts")]
 transform = Transform3D(0.971067, -0.237236, 0.0273543, 0.23484, 0.969441, 0.0709576, -0.0433521, -0.0624807, 0.997104, 3.82157, 1.78349, -7.62735)

@@ -12,20 +12,20 @@ emission = Color(0, 0.929412, 0.929412, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_rygx8"]
 
 [node name="Cube" type="Node3D"]
-transform = Transform3D(0.971067, -0.237236, 0.0273543, 0.23484, 0.969441, 0.0709576, -0.0433521, -0.0624807, 0.997104, 7.05296, 14.866, -14.9439)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(0.971067, 0.23484, -0.0433521, -0.237236, 0.96944, -0.0624807, 0.0273543, 0.0709576, 0.997104, -4.47397, 0.815231, -2.50956)
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 8
 collision_mask = 27
 physics_material_override = SubResource("PhysicsMaterial_ufnwo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(0.971067, -0.237236, 0.0273543, 0.23484, 0.969441, 0.0709577, -0.0433521, -0.0624807, 0.997104, 4.60657, 0.438421, 2.35927)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_i7sge")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(0.971067, -0.237236, 0.0273543, 0.23484, 0.969441, 0.0709577, -0.0433521, -0.0624807, 0.997104, 4.60657, 0.438421, 2.35927)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_4jnk8")
 mesh = SubResource("BoxMesh_rygx8")
 skeleton = NodePath("")

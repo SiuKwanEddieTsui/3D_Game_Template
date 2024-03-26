@@ -18,6 +18,7 @@ collision_mask = 6
 script = ExtResource("1_qtton")
 
 [node name="MeshInstance" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_wm1ia")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
@@ -33,11 +34,10 @@ collision_mask = 8
 script = ExtResource("2_ixhse")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera/PickupArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0452598, -0.4879, -0.454686)
 shape = SubResource("BoxShape3D_4b780")
 
 [node name="hand" type="Marker3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0689616, -0.383244, -2.18653)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0689616, -0.383244, -1.42662)
 
 [node name="jump" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_rydab")
