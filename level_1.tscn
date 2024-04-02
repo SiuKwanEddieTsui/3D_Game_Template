@@ -1,21 +1,26 @@
-[gd_scene load_steps=79 format=3 uid="uid://bgjxqnbwa01lc"]
+[gd_scene load_steps=90 format=3 uid="uid://bgjxqnbwa01lc"]
 
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_4vkqj"]
 [ext_resource type="PackedScene" uid="uid://cmd1up44piqcg" path="res://Scenes/UI.tscn" id="1_pbilb"]
-[ext_resource type="PackedScene" uid="uid://o6d5wnjrrxs" path="res://pigeon.glb" id="1_qc7lr"]
+[ext_resource type="PackedScene" uid="uid://jfqgr2skttks" path="res://pigeon.glb" id="1_qc7lr"]
 [ext_resource type="PackedScene" uid="uid://5j1a8430y5nv" path="res://UI/hud.tscn" id="1_rye3p"]
 [ext_resource type="PackedScene" uid="uid://buop3rxr2eopd" path="res://Scenes/Components/tree.tscn" id="2_3y2d8"]
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="2_nnu7i"]
 [ext_resource type="Script" path="res://addons/csg_mesher/src/CSGMesher.gd" id="3_e68ao"]
 [ext_resource type="Material" uid="uid://b7st3o5jvnu23" path="res://Materials/GreenGrid.tres" id="3_j0rpj"]
-[ext_resource type="Texture2D" uid="uid://cmj0adv4q81mr" path="res://Textures/Ultimate_Skies_4k_0069_sm.exr" id="5_ywnym"]
+[ext_resource type="Texture2D" uid="uid://b1wl3m3s5ipsk" path="res://Textures/Ultimate_Skies_4k_0069_sm.exr" id="5_ywnym"]
 [ext_resource type="Script" path="res://RespawnMesh.gd" id="6_nxx8h"]
 [ext_resource type="PackedScene" uid="uid://cxmxeg5w86lmc" path="res://Scenes/Components/collectibles.tscn" id="7_oy3bs"]
 [ext_resource type="Script" path="res://Scripts/EnemyNav.gd" id="8_jb04y"]
+[ext_resource type="PackedScene" uid="uid://cdomia0jo5c8g" path="res://Scenes/bouncy_block.tscn" id="9_63qfp"]
+[ext_resource type="PackedScene" uid="uid://cxmy2rpdjuifc" path="res://Scenes/hoops.tscn" id="9_h61bn"]
 [ext_resource type="PackedScene" uid="uid://dayxjai01uxhn" path="res://Levels/ghost.tscn" id="10_mliku"]
 [ext_resource type="PackedScene" uid="uid://qjfnxb81bywk" path="res://Scenes/Components/ballthrow.tscn" id="11_2mjts"]
 [ext_resource type="PackedScene" uid="uid://cs1qopogbgq88" path="res://Scenes/Components/cube.tscn" id="11_7fb76"]
-[ext_resource type="AudioStream" uid="uid://dxhwgcl72dfjd" path="res://Sounds/Triple5 Here - Even More Floating.mp3" id="13_tephx"]
+[ext_resource type="PackedScene" uid="uid://d0wg0jrn61o5g" path="res://Scenes/slide.tscn" id="11_bh4s3"]
+[ext_resource type="AudioStream" uid="uid://c5hib7lpu14b4" path="res://Sounds/Triple5 Here - Even More Floating.mp3" id="13_tephx"]
+[ext_resource type="Script" path="res://Scripts/MovingPlatform.gd" id="17_c51ka"]
+[ext_resource type="Script" path="res://Scripts/MovingPlatformB.gd" id="18_o3eht"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fymi0"]
 diffuse_mode = 3
@@ -143,6 +148,11 @@ background_mode = 2
 background_energy_multiplier = 0.66
 sky = SubResource("Sky_neyg5")
 ambient_light_color = Color(0.266667, 0.486275, 1, 1)
+glow_enabled = true
+glow_intensity = 1.39
+glow_strength = 1.13
+glow_blend_mode = 4
+glow_hdr_scale = 2.17
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.02
 volumetric_fog_sky_affect = 0.089
@@ -278,6 +288,29 @@ albedo_color = Color(0.215686, 0.231373, 0.235294, 1)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pjo80"]
 points = PackedVector3Array(15.2381, 0.138095, 15.2381, -15.2381, -0.338095, -15.2381, -15.2381, 0.138095, -15.2381, 15.2381, -0.338095, -15.2381, -15.2381, -0.338095, 15.2381, -15.2381, 0.138095, 15.2381, 15.2381, 0.138095, -15.2381, 15.2381, -0.338095, 15.2381)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tr756"]
+top_radius = 2.0
+bottom_radius = 2.0
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x2itl"]
+albedo_color = Color(0, 0, 1, 1)
+emission = Color(0, 0, 1, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gkwvh"]
+height = 1.0
+radius = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_11n3w"]
+size = Vector3(15, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52ldm"]
+albedo_color = Color(0, 0.713726, 0.811765, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nf6js"]
+size = Vector3(15, 1, 1)
 
 [node name="Level 1" type="Node3D"]
 metadata/_edit_lock_ = true
@@ -495,7 +528,6 @@ light_energy = 5.0
 [node name="Player" parent="." instance=ExtResource("1_4vkqj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.59343, 3.0678, 9.55398)
 visible = false
-jump_height = 3.0
 camera_sens = 3.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -615,8 +647,23 @@ mesh = SubResource("CylinderMesh_tan3k")
 [node name="OmniLight3D" type="OmniLight3D" parent="Torches/Torch6/Torchhead"]
 light_color = Color(1, 1, 0, 1)
 
+[node name="Hoops" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -166.908, 25.9524, 31.4876)
+
+[node name="Hoops" parent="Hoops" instance=ExtResource("9_h61bn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 121.445, -16.9044, -45.4474)
+
 [node name="Blocks" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.45148, 2.60113, -3.70791)
+
+[node name="BouncyBlock" parent="Blocks" instance=ExtResource("9_63qfp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138.742, 16.8771, 35.1955)
+
+[node name="BouncyBlock2" parent="Blocks" instance=ExtResource("9_63qfp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -153.782, 19.9106, 35.1955)
+
+[node name="BouncyBlock3" parent="Blocks" instance=ExtResource("9_63qfp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -170.359, 23.3512, 35.1955)
 
 [node name="Block" type="Node3D" parent="Blocks"]
 
@@ -834,6 +881,132 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.7504, 46.2868, 27.8989)
 [node name="Collectibles19" parent="collectibles" instance=ExtResource("7_oy3bs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.8628, 53.9261, 31.1653)
 
+[node name="Collectibles20" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.249, 58.3218, 31.3419)
+
+[node name="Collectibles21" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.0445, 62.4981, 31.1653)
+
+[node name="Collectibles22" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.4579, 62.5226, 31.1653)
+
+[node name="Collectibles23" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.7188, 62.5226, 31.1653)
+
+[node name="Collectibles24" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.0277, 62.6077, 31.1653)
+
+[node name="Collectibles25" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.5181, 62.6715, 31.1653)
+
+[node name="Collectibles26" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.9292, 62.6077, 31.1653)
+
+[node name="Collectibles27" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.5767, 62.5438, 31.1653)
+
+[node name="Collectibles28" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.1829, 62.6077, 31.1653)
+
+[node name="Collectibles29" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.8817, 62.629, 31.1653)
+
+[node name="Collectibles30" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.5552, 62.6928, 31.1653)
+
+[node name="Collectibles31" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.5163, 65.9265, 31.1653)
+
+[node name="Collectibles32" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.0672, 65.9265, 31.1653)
+
+[node name="Collectibles33" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.1147, 65.9265, 31.1653)
+
+[node name="Collectibles34" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.0416, 67.194, 31.1653)
+
+[node name="Collectibles35" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.8482, 69.0046, 31.1653)
+
+[node name="Collectibles36" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.2569, 67.9182, 31.1653)
+
+[node name="Collectibles37" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -83.5452, 67.194, 31.1653)
+
+[node name="Collectibles38" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -85.8335, 63.301, 31.1653)
+
+[node name="Collectibles39" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -87.8809, 60.6755, 31.1653)
+
+[node name="Collectibles40" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90.0487, 57.869, 31.1653)
+
+[node name="Collectibles41" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.2166, 53.3423, 31.1653)
+
+[node name="Collectibles42" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94.3844, 52.2559, 31.1653)
+
+[node name="Collectibles43" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.191, 50.1736, 31.1653)
+
+[node name="Collectibles44" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -97.9975, 52.8896, 31.1653)
+
+[node name="Collectibles45" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.6836, 51.1695, 31.1653)
+
+[node name="Collectibles46" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -101.249, 53.3423, 31.1653)
+
+[node name="Collectibles47" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -102.935, 50.8074, 31.1653)
+
+[node name="Collectibles48" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -104.501, 49.0872, 31.1653)
+
+[node name="Collectibles49" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -106.187, 48.9062, 31.1653)
+
+[node name="Collectibles50" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -107.873, 50.6263, 31.1653)
+
+[node name="Collectibles51" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -109.68, 52.7991, 31.1653)
+
+[node name="Collectibles52" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -112.329, 50.9884, 31.1653)
+
+[node name="Collectibles53" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -114.136, 48.9967, 31.1653)
+
+[node name="Collectibles54" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -116.063, 52.0748, 31.1653)
+
+[node name="Collectibles55" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -118.11, 52.7086, 31.1653)
+
+[node name="Collectibles56" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.158, 53.5234, 31.1653)
+
+[node name="Collectibles57" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -121.964, 52.1654, 31.1653)
+
+[node name="Collectibles58" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -123.891, 53.2518, 31.1653)
+
+[node name="Collectibles59" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -135.333, 58.5027, 31.1653)
+
+[node name="Collectibles60" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150.026, 62.2146, 31.1653)
+
+[node name="Collectibles61" parent="collectibles" instance=ExtResource("7_oy3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -166.646, 65.9265, 31.1653)
+
 [node name="Level 2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3471, 8.63696, -16.3989)
 mesh = SubResource("BoxMesh_8i8gx")
@@ -859,6 +1032,9 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Circle Platform/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_gi7gc")
+
+[node name="slide" parent="." instance=ExtResource("11_bh4s3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.35576, 10.6882, 52.4289)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_kd0lu")
@@ -915,6 +1091,47 @@ stream = ExtResource("13_tephx")
 volume_db = -39.0
 autoplay = true
 
+[node name="MovingPlatforms" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.2036, 22.6842, 31.0668)
+
+[node name="MovingPlatformA" type="CharacterBody3D" parent="MovingPlatforms"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("17_c51ka")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/MovingPlatformA"]
+mesh = SubResource("CylinderMesh_tr756")
+surface_material_override/0 = SubResource("StandardMaterial3D_x2itl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/MovingPlatformA"]
+shape = SubResource("CylinderShape3D_gkwvh")
+
+[node name="MovingPlatformA2" type="CharacterBody3D" parent="MovingPlatforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.1714, 8.11531, 0)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("17_c51ka")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/MovingPlatformA2"]
+mesh = SubResource("CylinderMesh_tr756")
+surface_material_override/0 = SubResource("StandardMaterial3D_x2itl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/MovingPlatformA2"]
+shape = SubResource("CylinderShape3D_gkwvh")
+
+[node name="MovingPlatformB" type="CharacterBody3D" parent="MovingPlatforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2915, 4.40649, -0.00304794)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("18_o3eht")
+
+[node name="SpinningPlatform" type="MeshInstance3D" parent="MovingPlatforms/MovingPlatformB"]
+mesh = SubResource("BoxMesh_11n3w")
+surface_material_override/0 = SubResource("StandardMaterial3D_52ldm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/MovingPlatformB"]
+shape = SubResource("BoxShape3D_nf6js")
+
 [connection signal="update_console" from="Player/Camera/PickupArea" to="UI/HUD" method="_on_pickup_area_update_console"]
 [connection signal="body_entered" from="RespawnMesh" to="RespawnMesh" method="_on_body_entered"]
 [connection signal="item_collected" from="collectibles/Collectibles" to="UI/HUD" method="_on_collectibles_item_collected"]
@@ -936,6 +1153,48 @@ autoplay = true
 [connection signal="item_collected" from="collectibles/Collectibles17" to="UI/HUD" method="_on_collectibles_item_collected"]
 [connection signal="item_collected" from="collectibles/Collectibles18" to="UI/HUD" method="_on_collectibles_item_collected"]
 [connection signal="item_collected" from="collectibles/Collectibles19" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles20" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles21" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles22" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles23" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles24" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles25" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles26" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles27" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles28" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles29" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles30" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles31" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles32" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles33" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles34" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles35" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles36" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles37" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles38" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles39" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles40" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles41" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles42" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles43" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles44" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles45" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles46" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles47" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles48" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles49" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles50" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles51" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles52" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles53" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles54" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles55" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles56" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles57" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles58" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles59" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles60" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="item_collected" from="collectibles/Collectibles61" to="UI/HUD" method="_on_collectibles_item_collected"]
 
 [editable path="pigeon"]
 [editable path="Player"]

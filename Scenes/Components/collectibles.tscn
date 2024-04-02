@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cxmxeg5w86lmc"]
 
 [ext_resource type="Script" path="res://Collectibles.gd" id="1_vuu4d"]
-[ext_resource type="AudioStream" uid="uid://cgj30rh4o6sg6" path="res://Sounds/Pickup_coin 1.wav" id="2_fjim3"]
+[ext_resource type="AudioStream" uid="uid://dhjdyq4dujxtm" path="res://Sounds/Pickup_coin 1.wav" id="2_fjim3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uc05h"]
 radius = 0.2
@@ -13,7 +13,7 @@ size = Vector3(0.5, 0.5, 0.5)
 albedo_color = Color(1, 1, 0.32549, 0.992157)
 emission_enabled = true
 emission = Color(1, 1, 0, 1)
-emission_energy_multiplier = 10.89
+emission_energy_multiplier = 16.0
 
 [node name="Collectibles" type="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1355, 45.0724, -14.9013)

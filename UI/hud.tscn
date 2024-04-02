@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://5j1a8430y5nv"]
+[gd_scene load_steps=3 format=3 uid="uid://5j1a8430y5nv"]
 
-[ext_resource type="Texture2D" uid="uid://bi5x8qwmbciy8" path="res://Textures/boxicon.png" id="1_1lmyt"]
+[ext_resource type="Texture2D" uid="uid://cf20ewc0o03q0" path="res://Textures/boxicon.png" id="1_1lmyt"]
+[ext_resource type="Texture2D" uid="uid://qtpv40jgob6g" path="res://Textures/Hoop.png" id="2_jivr8"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -37,3 +38,16 @@ grow_vertical = 2
 [node name="Console" type="Label" parent="CenterContainer2"]
 layout_mode = 2
 text = "preview text"
+
+[node name="CenterContainer3" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = 151.0
+offset_right = 277.0
+offset_bottom = 123.0
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer3"]
+layout_mode = 2
+texture = ExtResource("2_jivr8")
+
+[node name="Score" type="Label" parent="CenterContainer3"]
+layout_mode = 2

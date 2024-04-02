@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/FirstPersonController.gd" id="1_qtton"]
 [ext_resource type="Script" path="res://Scripts/Pickup.gd" id="2_ixhse"]
-[ext_resource type="AudioStream" uid="uid://bg1wc1jbid388" path="res://Sounds/Jump 1.wav" id="3_rydab"]
-[ext_resource type="AudioStream" uid="uid://ve8rx5c6lyyg" path="res://Sounds/Laser_shoot 1.wav" id="4_ye0h8"]
-[ext_resource type="AudioStream" uid="uid://ci3gq155bg35x" path="res://Sounds/Pickup_coin 2.wav" id="5_bo5lm"]
+[ext_resource type="AudioStream" uid="uid://coqi2s4lk054g" path="res://Sounds/Jump 1.wav" id="3_rydab"]
+[ext_resource type="AudioStream" uid="uid://bu7e53uu4vjcc" path="res://Sounds/Laser_shoot 1.wav" id="4_ye0h8"]
+[ext_resource type="AudioStream" uid="uid://btb1sucy4t841" path="res://Sounds/Pickup_coin 2.wav" id="5_bo5lm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wm1ia"]
 
@@ -15,7 +15,9 @@ size = Vector3(1.521, 1.94824, 1.8916)
 
 [node name="Player" type="CharacterBody3D"]
 collision_mask = 6
+floor_stop_on_slope = false
 script = ExtResource("1_qtton")
+jump_height = 3.0
 
 [node name="MeshInstance" type="MeshInstance3D" parent="."]
 visible = false
@@ -41,14 +43,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0689616, -0.383244, -1.426
 
 [node name="jump" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_rydab")
-volume_db = -24.0
+volume_db = -41.297
 
 [node name="pickup" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_bo5lm")
+volume_db = -40.36
 
 [node name="throw" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0197409, 0)
 stream = ExtResource("4_ye0h8")
+volume_db = -41.802
 
 [node name="walk" type="AudioStreamPlayer3D" parent="."]
 
