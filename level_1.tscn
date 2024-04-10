@@ -1,14 +1,14 @@
-[gd_scene load_steps=90 format=3 uid="uid://bgjxqnbwa01lc"]
+[gd_scene load_steps=95 format=3 uid="uid://bgjxqnbwa01lc"]
 
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_4vkqj"]
 [ext_resource type="PackedScene" uid="uid://cmd1up44piqcg" path="res://Scenes/UI.tscn" id="1_pbilb"]
-[ext_resource type="PackedScene" uid="uid://jfqgr2skttks" path="res://pigeon.glb" id="1_qc7lr"]
+[ext_resource type="PackedScene" uid="uid://o6d5wnjrrxs" path="res://pigeon.glb" id="1_qc7lr"]
 [ext_resource type="PackedScene" uid="uid://5j1a8430y5nv" path="res://UI/hud.tscn" id="1_rye3p"]
 [ext_resource type="PackedScene" uid="uid://buop3rxr2eopd" path="res://Scenes/Components/tree.tscn" id="2_3y2d8"]
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="2_nnu7i"]
 [ext_resource type="Script" path="res://addons/csg_mesher/src/CSGMesher.gd" id="3_e68ao"]
 [ext_resource type="Material" uid="uid://b7st3o5jvnu23" path="res://Materials/GreenGrid.tres" id="3_j0rpj"]
-[ext_resource type="Texture2D" uid="uid://b1wl3m3s5ipsk" path="res://Textures/Ultimate_Skies_4k_0069_sm.exr" id="5_ywnym"]
+[ext_resource type="Texture2D" uid="uid://cmj0adv4q81mr" path="res://Textures/Ultimate_Skies_4k_0069_sm.exr" id="5_ywnym"]
 [ext_resource type="Script" path="res://RespawnMesh.gd" id="6_nxx8h"]
 [ext_resource type="PackedScene" uid="uid://cxmxeg5w86lmc" path="res://Scenes/Components/collectibles.tscn" id="7_oy3bs"]
 [ext_resource type="Script" path="res://Scripts/EnemyNav.gd" id="8_jb04y"]
@@ -18,9 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://qjfnxb81bywk" path="res://Scenes/Components/ballthrow.tscn" id="11_2mjts"]
 [ext_resource type="PackedScene" uid="uid://cs1qopogbgq88" path="res://Scenes/Components/cube.tscn" id="11_7fb76"]
 [ext_resource type="PackedScene" uid="uid://d0wg0jrn61o5g" path="res://Scenes/slide.tscn" id="11_bh4s3"]
-[ext_resource type="AudioStream" uid="uid://c5hib7lpu14b4" path="res://Sounds/Triple5 Here - Even More Floating.mp3" id="13_tephx"]
+[ext_resource type="AudioStream" uid="uid://dxhwgcl72dfjd" path="res://Sounds/Triple5 Here - Even More Floating.mp3" id="13_tephx"]
 [ext_resource type="Script" path="res://Scripts/MovingPlatform.gd" id="17_c51ka"]
 [ext_resource type="Script" path="res://Scripts/MovingPlatformB.gd" id="18_o3eht"]
+[ext_resource type="Script" path="res://Scripts/MovingPlatformVertical.gd" id="22_64oxe"]
+[ext_resource type="Script" path="res://Scripts/MovingPlatformC3.gd" id="22_ksnad"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fymi0"]
 diffuse_mode = 3
@@ -311,6 +313,18 @@ albedo_color = Color(0, 0.713726, 0.811765, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nf6js"]
 size = Vector3(15, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xilh7"]
+top_radius = 3.0
+bottom_radius = 3.0
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5p6yt"]
+albedo_color = Color(0, 1, 0.462745, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_02peh"]
+height = 0.5
+radius = 3.0
 
 [node name="Level 1" type="Node3D"]
 metadata/_edit_lock_ = true
@@ -653,74 +667,68 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -166.908, 25.9524, 31.4876)
 [node name="Hoops" parent="Hoops" instance=ExtResource("9_h61bn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 121.445, -16.9044, -45.4474)
 
-[node name="Blocks" type="Node3D" parent="."]
+[node name="Platforms" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.45148, 2.60113, -3.70791)
 
-[node name="BouncyBlock" parent="Blocks" instance=ExtResource("9_63qfp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138.742, 16.8771, 35.1955)
+[node name="BouncyBlock" parent="Platforms" instance=ExtResource("9_63qfp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.4924, -3.16835, 0)
 
-[node name="BouncyBlock2" parent="Blocks" instance=ExtResource("9_63qfp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -153.782, 19.9106, 35.1955)
+[node name="Block" type="Node3D" parent="Platforms"]
 
-[node name="BouncyBlock3" parent="Blocks" instance=ExtResource("9_63qfp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -170.359, 23.3512, 35.1955)
-
-[node name="Block" type="Node3D" parent="Blocks"]
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Blocks/Block"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/Block"]
 collision_layer = 2
 collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_7dl1v")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Blocks/Block/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Block/StaticBody3D"]
 mesh = SubResource("BoxMesh_8t7wi")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Blocks/Block/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Block/StaticBody3D"]
 shape = SubResource("BoxShape3D_y65st")
 
-[node name="Block3" type="Node3D" parent="Blocks"]
+[node name="Block3" type="Node3D" parent="Platforms"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.1677, 15.9396, 34.6897)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Blocks/Block3"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/Block3"]
 collision_layer = 2
 collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_7dl1v")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Blocks/Block3/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Block3/StaticBody3D"]
 mesh = SubResource("BoxMesh_8t7wi")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Blocks/Block3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Block3/StaticBody3D"]
 shape = SubResource("BoxShape3D_y65st")
 
-[node name="Block2" type="Node3D" parent="Blocks"]
+[node name="Block2" type="Node3D" parent="Platforms"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.98271, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Blocks/Block2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/Block2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.626005, 0, -6.72898)
 collision_layer = 2
 collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_7dl1v")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Blocks/Block2/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Block2/StaticBody3D"]
 unique_name_in_owner = true
 mesh = SubResource("BoxMesh_8t7wi")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Blocks/Block2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Block2/StaticBody3D"]
 shape = SubResource("BoxShape3D_y65st")
 
-[node name="Block Red" type="Node3D" parent="Blocks"]
+[node name="Block Red" type="Node3D" parent="Platforms"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Blocks/Block Red"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Block Red"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.06156, 5.24617, -13.8181)
 mesh = SubResource("BoxMesh_urkth")
 surface_material_override/0 = SubResource("StandardMaterial3D_hdmgm")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Blocks/Block Red/MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/Block Red/MeshInstance3D"]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Blocks/Block Red/MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Block Red/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_e3k4l")
 
 [node name="Rings" type="Node3D" parent="."]
@@ -1131,6 +1139,49 @@ surface_material_override/0 = SubResource("StandardMaterial3D_52ldm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/MovingPlatformB"]
 shape = SubResource("BoxShape3D_nf6js")
+
+[node name="MovingPlatformC" type="CharacterBody3D" parent="MovingPlatforms"]
+process_physics_priority = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100.019, -2.39395, 0)
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("22_64oxe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/MovingPlatformC"]
+mesh = SubResource("CylinderMesh_xilh7")
+surface_material_override/0 = SubResource("StandardMaterial3D_5p6yt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/MovingPlatformC"]
+shape = SubResource("CylinderShape3D_02peh")
+
+[node name="MovingPlatformC2" type="CharacterBody3D" parent="MovingPlatforms"]
+process_physics_priority = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -114.909, 2.53114, 0)
+collision_layer = 2
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("22_64oxe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/MovingPlatformC2"]
+mesh = SubResource("CylinderMesh_xilh7")
+surface_material_override/0 = SubResource("StandardMaterial3D_5p6yt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/MovingPlatformC2"]
+shape = SubResource("CylinderShape3D_02peh")
+
+[node name="MovingPlatformC3" type="CharacterBody3D" parent="MovingPlatforms"]
+process_physics_priority = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -131.311, 5.94744, 0)
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("22_ksnad")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/MovingPlatformC3"]
+mesh = SubResource("CylinderMesh_xilh7")
+surface_material_override/0 = SubResource("StandardMaterial3D_5p6yt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/MovingPlatformC3"]
+shape = SubResource("CylinderShape3D_02peh")
 
 [connection signal="update_console" from="Player/Camera/PickupArea" to="UI/HUD" method="_on_pickup_area_update_console"]
 [connection signal="body_entered" from="RespawnMesh" to="RespawnMesh" method="_on_body_entered"]

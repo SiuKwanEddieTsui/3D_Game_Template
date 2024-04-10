@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdomia0jo5c8g"]
+[gd_scene load_steps=6 format=3 uid="uid://cdomia0jo5c8g"]
 
 [ext_resource type="Script" path="res://Scripts/BouncyBlock.gd" id="1_edqc7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v4iva"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_gf13o"]
 top_radius = 6.0
@@ -21,6 +23,8 @@ radius = 6.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 collision_layer = 2
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_v4iva")
 script = ExtResource("1_edqc7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
@@ -33,6 +37,7 @@ shape = SubResource("CylinderShape3D_a3j3e")
 [node name="Area3D" type="Area3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.489849, 0)
 collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/Area3D"]
 shape = SubResource("CylinderShape3D_a3j3e")
