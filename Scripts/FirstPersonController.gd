@@ -9,6 +9,11 @@ class_name Player extends CharacterBody3D
 @export_range(0.1, 3.0, 0.1) var jump_height: float = 1 # m
 @export_range(0.1, 3.0, 0.1, "or_greater") var camera_sens: float = 1
 
+#AddsLaunchpadFunctionality
+var jump_force = 10.0
+var double_jump_unlocked = false
+var jump_count = 0
+
 var jumping: bool = false
 var mouse_captured: bool = false
 
@@ -34,9 +39,31 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("exit"): get_tree().quit()
 
 func _physics_process(delta: float) -> void:
-	if mouse_captured: _handle_joypad_camera_rotation(delta)
-	velocity = _walk(delta) + _gravity(delta) + _jump(delta)
-	move_and_slide()
+		#LaunchFunctionality
+	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if is_on_floor():
+		jump_count = 0
+	
+	if Input.is_action_just_pressed("jump"):
+		if is_on_floor():
+			velocity.y = jump_force
+			jump_count += 1
+		elif double_jump_unlocked and jump_count < 2:
+			velocity.y = jump_force
+			jump_count += 1
+			print(jump_count)
+	velocity.y -= 9.81 * delta
+			#velocity.y += gravity * delta
+			#velocity = velocity.lerp(direction * speed, delta * 10.0)
+	if mouse_captured:
+		_handle_joypad_camera_rotation(delta)
+		velocity = _walk(delta) + _gravity(delta) + _jump(delta)
+		move_and_slide()
+
+func unlock_double_jump():
+	double_jump_unlocked = true
+	print("Unlocked Double Jump!")
 
 func capture_mouse() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcwb12x2k1r73"]
+
+[ext_resource type="Texture2D" uid="uid://t3yuuvmuijy4" path="res://Textures/TitleScreen.jpg" id="1_i1lin"]
+[ext_resource type="Script" path="res://Scripts/opening.gd" id="1_ib3qd"]
+[ext_resource type="AudioStream" uid="uid://dmiba3ipx644u" path="res://Sounds/Ascend (Rise Above).mp3" id="3_2pxmt"]
+[ext_resource type="AudioStream" uid="uid://cv52lonryaa4c" path="res://Sounds/ElevenLabs_2024-04-12T08_19_33_Callum_pre_s50_sb75_m1.mp3" id="4_mviqd"]
+
+[node name="Opening" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+script = ExtResource("1_ib3qd")
+dialog_file = "res://Dialogue/opening.dialogue"
+dialog_name = "opening"
+next_scene = "res://UI/Splash Menu.tscn"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -64.03
+offset_top = -36.075
+offset_right = 1215.97
+offset_bottom = 683.925
+texture = ExtResource("1_i1lin")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2pxmt")
+volume_db = -13.074
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_mviqd")
+volume_db = -5.535
+autoplay = true
