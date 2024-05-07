@@ -1201,6 +1201,18 @@ collision_mask = 0
 
 [node name="Physics objects" type="Node3D" parent="."]
 
+[node name="ball15" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.81509, 10.9687, -17.1931)
+
+[node name="ball14" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.6683, 9.57338, -15.9991)
+
+[node name="ball13" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8119, 11.7197, -21.5883)
+
+[node name="ball6" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.593, 18.6596, -7.9719)
+
 [node name="ball" parent="Physics objects" instance=ExtResource("11_2mjts")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3074, 9.3298, -13.2338)
 
@@ -1220,6 +1232,39 @@ transform = Transform3D(0.971067, -0.237236, 0.0273543, 0.23484, 0.969441, 0.070
 
 [node name="Cube2" parent="Physics objects" instance=ExtResource("11_7fb76")]
 transform = Transform3D(0.971067, -0.237236, 0.0273543, 0.23484, 0.969441, 0.0709576, -0.0433521, -0.0624807, 0.997104, 0.0048461, 4.81899, 10.4338)
+
+[node name="ball8" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.257, 16.3489, -7.47286)
+
+[node name="ball9" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.7935, 13.8641, -17.8023)
+
+[node name="ball10" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.1109, 17.1249, -7.97671)
+
+[node name="ball11" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.50622, 10.6015, -17.3023)
+
+[node name="ball7" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3074, 10.8213, -6.59033)
+
+[node name="ball12" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3074, 9.3298, -13.2338)
+
+[node name="ball17" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1483, 13.268, -20.8832)
+
+[node name="ball18" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(0.999644, 0, -0.0267004, 0, 1, 0, 0.0267004, 0, 0.999644, -15.6706, 9.39351, -16.7977)
+
+[node name="ball16" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.9404, 9.8553, -21.6906)
+
+[node name="ball19" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3074, 11.2959, -16.5657)
+
+[node name="ball20" parent="Physics objects" instance=ExtResource("11_2mjts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.1837, 11.3972, -7.39084)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_s38lw")
