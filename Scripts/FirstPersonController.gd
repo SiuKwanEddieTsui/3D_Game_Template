@@ -8,11 +8,15 @@ class_name Player extends CharacterBody3D
 @export_range(10, 400, 1) var acceleration: float = 100 # m/s^2
 @export_range(0.1, 3.0, 0.1) var jump_height: float = 1 # m
 @export_range(0.1, 3.0, 0.1, "or_greater") var camera_sens: float = 1
+# Define a sprint multiplier
+@export var sprint_multiplier: float = 1.5
 
 #AddsLaunchpadFunctionality
-var jump_force = 10.0
+var external_force = Vector3.ZERO
+var jump_force = 50.0
 var double_jump_unlocked = false
 var jump_count = 0
+var jump_max = 2
 
 var jumping: bool = false
 var mouse_captured: bool = false
@@ -25,10 +29,18 @@ var look_dir: Vector2 # Input direction for look/aim
 var walk_vel: Vector3 # Walking velocity 
 var grav_vel: Vector3 # Gravity velocity 
 var jump_vel: Vector3 # Jumping velocity
+var air_dash_unlocked: bool = false
+var air_dash_used: bool = false
+var air_dash_speed: float = 20.0  # Adjust this value based on desired dash intensity
 
 @onready var camera: Camera3D = $Camera
+# At the top of your script
+@onready var dash_timer = $DashTimer
 
 func _ready() -> void:
+	dash_timer.wait_time = 0.2  # Duration of the dash effect
+	dash_timer.one_shot = true
+	dash_timer.connect("timeout", Callable(self, "_on_DashTimer_timeout"))
 	capture_mouse()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -38,28 +50,68 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("jump"): jumping = true
 	if Input.is_action_just_pressed("exit"): get_tree().quit()
 
-func _physics_process(delta: float) -> void:
-		#LaunchFunctionality
+func apply_push_force(push_force: Vector3):
+	velocity += push_force  # Directly modify the built-in 'velocity'
+	
+func apply_external_force(force):
+	external_force += force
+
+func _physics_process(delta: float):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var forward_dir = camera.global_transform.basis.z.normalized()
+	var right_dir = camera.global_transform.basis.x.normalized()
+	var direction = input_dir.x * right_dir + input_dir.y * forward_dir
+	velocity += external_force
+	external_force = Vector3.ZERO  # Reset after applying
+	# Continue with normal movement and physics processing
+
 	if is_on_floor():
 		jump_count = 0
-	
+		air_dash_used = false
+		dash_timer.stop()
+
 	if Input.is_action_just_pressed("jump"):
-		if is_on_floor():
-			velocity.y = jump_force
+		if is_on_floor() or (double_jump_unlocked and jump_count < jump_max):
+			velocity.y = sqrt(3 * gravity * jump_height)
 			jump_count += 1
-		elif double_jump_unlocked and jump_count < 2:
-			velocity.y = jump_force
-			jump_count += 1
-			print(jump_count)
-	velocity.y -= 9.81 * delta
-			#velocity.y += gravity * delta
-			#velocity = velocity.lerp(direction * speed, delta * 10.0)
+
+	velocity.y -= gravity * delta
+
+	if Input.is_action_pressed("sprint"):
+		if not is_on_floor() and air_dash_unlocked and not air_dash_used:
+			dash_timer.start()
+			velocity += forward_dir * air_dash_speed
+			air_dash_used = true
+		elif is_on_floor():
+			direction *= sprint_multiplier
+
+	velocity.x = lerp(velocity.x, direction.x * speed, acceleration * delta)
+	velocity.z = lerp(velocity.z, direction.z * speed, acceleration * delta)
+
 	if mouse_captured:
 		_handle_joypad_camera_rotation(delta)
-		velocity = _walk(delta) + _gravity(delta) + _jump(delta)
-		move_and_slide()
+
+	# Here we call move_and_slide without any arguments
+	move_and_slide()
+
+	if not dash_timer.is_stopped():
+		velocity += forward_dir * (air_dash_speed * delta)
+		# Your existing movement logic here
+	# No need to pass 'velocity' or 'up_direction', just call 'move_and_slide()'
+	move_and_slide()
+	
+
+	# You can reset the external force application after moving if desired
+	# This ensures the push force only affects one frame unless continuously applied
+	velocity.x = 0
+	velocity.z = 0
+	# Retain vertical velocity (gravity, jumps) unless you want to stop those too
+
+
+
+func launch(launch_velocity: Vector3):
+	print("Launching player with velocity:", launch_velocity)
+	velocity += launch_velocity
 
 func unlock_double_jump():
 	double_jump_unlocked = true
@@ -96,12 +148,14 @@ func _gravity(delta: float) -> Vector3:
 	return grav_vel
 
 func _jump(delta: float) -> Vector3:
+	# Jump logic consolidated here
 	if jumping:
-		if is_on_floor(): jump_vel = Vector3(0, sqrt(4 * jump_height * gravity), 0)
-		jumping = false
-		$jump.play()
-		return jump_vel
-	jump_vel = Vector3.ZERO if is_on_floor() else jump_vel.move_toward(Vector3.ZERO, gravity * delta)
+		if jump_count < jump_max:
+			jump_vel = Vector3(0, sqrt(3 * jump_height * -gravity), 0)
+			jump_count += 1
+			jumping = false
+		else:
+			jumping = false
 	return jump_vel
 	
 func play_pickup_sound():

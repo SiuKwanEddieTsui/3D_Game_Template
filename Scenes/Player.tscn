@@ -13,7 +13,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_4b780"]
 size = Vector3(1.521, 1.94824, 1.8916)
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_mask = 6
 floor_stop_on_slope = false
 script = ExtResource("1_qtton")
@@ -55,6 +55,8 @@ stream = ExtResource("4_ye0h8")
 volume_db = -41.802
 
 [node name="walk" type="AudioStreamPlayer3D" parent="."]
+
+[node name="DashTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="Camera/PickupArea" to="Camera/PickupArea" method="_on_body_entered"]
 [connection signal="body_exited" from="Camera/PickupArea" to="Camera/PickupArea" method="_on_body_exited"]

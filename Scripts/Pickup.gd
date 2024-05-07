@@ -31,12 +31,14 @@ func _unhandled_input(_event):
 		$"../../throw".play()
 
 func _on_body_entered(body):
-	if picked_object and is_picked:
-		return
-	picked_object = body
-	emit_signal("update_console", "Press F to pickup objects")
-	
+	if body is RigidBody3D and not is_picked:
+		picked_object = body
+		emit_signal("update_console", "Press F to pickup objects")
 
 
 func _on_body_exited(body):
-	emit_signal("update_console", "")
+	if body is RigidBody3D:
+		if not is_picked or body != picked_object:
+			emit_signal("update_console", "")
+			if body == picked_object:
+				picked_object = null

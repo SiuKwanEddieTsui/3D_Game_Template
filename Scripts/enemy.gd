@@ -16,3 +16,13 @@ func _physics_process(delta):
 	
 func update_target_location(target_location):
 	nav_agent.set_target_position(target_location)
+
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group("Player"):
+		var collision_direction = body.global_transform.origin - global_transform.origin
+		collision_direction = collision_direction.normalized()
+		var push_force = collision_direction * 10
+		if body.has_method("apply_push_force"):
+			body.apply_push_force(push_force)
+			

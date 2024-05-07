@@ -1,0 +1,159 @@
+[gd_scene load_steps=21 format=3 uid="uid://pilb5gc36doc"]
+
+[ext_resource type="PackedScene" uid="uid://k8xij8cqnksb" path="res://Scenes/launch_platform.tscn" id="1_mihsf"]
+[ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="2_66pyh"]
+[ext_resource type="Script" path="res://Scripts/MovingPlatforms/MovingPlatform.gd" id="2_nq2op"]
+[ext_resource type="PackedScene" uid="uid://5j1a8430y5nv" path="res://UI/hud.tscn" id="3_w6rcm"]
+[ext_resource type="Script" path="res://UI/hud2.gd" id="5_67rpe"]
+[ext_resource type="PackedScene" uid="uid://cmd1up44piqcg" path="res://Scenes/UI.tscn" id="5_t7xll"]
+[ext_resource type="Texture2D" uid="uid://c3t76twlb7wli" path="res://Textures/Rock_Beach_Sunset.exr" id="6_10jo6"]
+[ext_resource type="Script" path="res://RespawnMesh.gd" id="8_b0vxu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmwgl"]
+emission_enabled = true
+emission = Color(0.886275, 0.886275, 0.886275, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1o1hr"]
+material = SubResource("StandardMaterial3D_gmwgl")
+top_radius = 10.0
+bottom_radius = 10.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_awsbr"]
+radius = 10.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0d2ct"]
+top_radius = 2.0
+bottom_radius = 2.0
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e4335"]
+albedo_color = Color(0, 0, 1, 1)
+emission = Color(0, 0, 1, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_w3q78"]
+height = 1.0
+radius = 2.0
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_77y1m"]
+panorama = ExtResource("6_10jo6")
+
+[sub_resource type="Sky" id="Sky_neyg5"]
+sky_material = SubResource("PanoramaSkyMaterial_77y1m")
+radiance_size = 4
+
+[sub_resource type="Environment" id="Environment_kovb8"]
+background_mode = 2
+background_energy_multiplier = 0.66
+sky = SubResource("Sky_neyg5")
+ambient_light_color = Color(0.266667, 0.486275, 1, 1)
+glow_enabled = true
+glow_intensity = 1.39
+glow_strength = 1.13
+glow_blend_mode = 4
+glow_hdr_scale = 2.17
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_sky_affect = 0.089
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_oqc3u"]
+
+[sub_resource type="FogMaterial" id="FogMaterial_vjgt2"]
+density = -0.0297
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_105sk"]
+size = Vector3(2000, 50, 2000)
+
+[node name="Level2" type="Node3D"]
+
+[node name="Platforms" type="Node3D" parent="."]
+
+[node name="Circle Platform" type="MeshInstance3D" parent="Platforms"]
+mesh = SubResource("CylinderMesh_1o1hr")
+skeleton = NodePath("../NavigationRegion3D/Levels")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/Circle Platform"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Circle Platform/StaticBody3D"]
+shape = SubResource("CylinderShape3D_awsbr")
+
+[node name="LaunchPlatform" parent="Platforms" instance=ExtResource("1_mihsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8628, 6.58834, 0)
+
+[node name="LaunchPlatform2" parent="Platforms" instance=ExtResource("1_mihsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.1355, 36.7892, 0)
+
+[node name="LaunchPlatform3" parent="Platforms" instance=ExtResource("1_mihsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -113.622, 67.9364, 0)
+
+[node name="MovingPlatformA" type="CharacterBody3D" parent="Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -182.605, 91.1606, 2.26873)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_nq2op")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/MovingPlatformA"]
+mesh = SubResource("CylinderMesh_0d2ct")
+surface_material_override/0 = SubResource("StandardMaterial3D_e4335")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/MovingPlatformA"]
+shape = SubResource("CylinderShape3D_w3q78")
+
+[node name="Circle Platform2" type="MeshInstance3D" parent="Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -216.559, 93.2359, 1.03118)
+mesh = SubResource("CylinderMesh_1o1hr")
+skeleton = NodePath("../NavigationRegion3D/Levels")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/Circle Platform2"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Circle Platform2/StaticBody3D"]
+shape = SubResource("CylinderShape3D_awsbr")
+
+[node name="Player" parent="." instance=ExtResource("2_66pyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9109, 3.0678, 0.128769)
+visible = false
+camera_sens = 3.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UI" instance=ExtResource("3_w6rcm")]
+mouse_filter = 2
+script = ExtResource("5_67rpe")
+
+[node name="Splash Menu" parent="." instance=ExtResource("5_t7xll")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kovb8")
+camera_attributes = SubResource("CameraAttributesPhysical_oqc3u")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.984939, 0.0562444, 0.163497, 0.00540239, -0.935138, 0.354242, 0.172816, 0.34979, 0.92075, -1.16941, 7.96405, 22.4144)
+light_energy = 0.7
+light_indirect_energy = 0.5
+light_volumetric_fog_energy = 0.5
+shadow_enabled = true
+shadow_bias = 0.0
+directional_shadow_mode = 0
+sky_mode = 1
+
+[node name="FogVolume" type="FogVolume" parent="."]
+size = Vector3(50, 50, 50)
+material = SubResource("FogMaterial_vjgt2")
+
+[node name="RespawnMesh" type="Area3D" parent="." node_paths=PackedStringArray("respawn_point")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -54.3956, 0)
+collision_layer = 0
+script = ExtResource("8_b0vxu")
+respawn_point = NodePath("../Platforms/Circle Platform")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RespawnMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.1146, 0)
+shape = SubResource("BoxShape3D_105sk")
+
+[connection signal="body_entered" from="RespawnMesh" to="RespawnMesh" method="_on_body_entered"]
+
+[editable path="Player"]
