@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://5j1a8430y5nv"]
 
-[ext_resource type="Texture2D" uid="uid://cf20ewc0o03q0" path="res://Textures/boxicon.png" id="1_1lmyt"]
-[ext_resource type="Texture2D" uid="uid://qtpv40jgob6g" path="res://Textures/Hoop.png" id="2_jivr8"]
+[ext_resource type="Texture2D" uid="uid://bi5x8qwmbciy8" path="res://Textures/boxicon.png" id="1_1lmyt"]
+[ext_resource type="Texture2D" uid="uid://d8gjx48bbpgv" path="res://Textures/Hoop.png" id="2_jivr8"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3

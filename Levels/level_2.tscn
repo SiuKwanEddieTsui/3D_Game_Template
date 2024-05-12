@@ -1,12 +1,13 @@
-[gd_scene load_steps=21 format=3 uid="uid://pilb5gc36doc"]
+[gd_scene load_steps=33 format=3 uid="uid://pilb5gc36doc"]
 
 [ext_resource type="PackedScene" uid="uid://k8xij8cqnksb" path="res://Scenes/launch_platform.tscn" id="1_mihsf"]
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="2_66pyh"]
 [ext_resource type="Script" path="res://Scripts/MovingPlatforms/MovingPlatform.gd" id="2_nq2op"]
+[ext_resource type="Script" path="res://Scripts/LaunchPad/LaunchPadB.gd" id="3_s84ri"]
 [ext_resource type="PackedScene" uid="uid://5j1a8430y5nv" path="res://UI/hud.tscn" id="3_w6rcm"]
 [ext_resource type="Script" path="res://UI/hud2.gd" id="5_67rpe"]
 [ext_resource type="PackedScene" uid="uid://cmd1up44piqcg" path="res://Scenes/UI.tscn" id="5_t7xll"]
-[ext_resource type="Texture2D" uid="uid://c3t76twlb7wli" path="res://Textures/Rock_Beach_Sunset.exr" id="6_10jo6"]
+[ext_resource type="Texture2D" uid="uid://du27gjhclmtd0" path="res://Textures/Rock_Beach_Sunset.exr" id="6_10jo6"]
 [ext_resource type="Script" path="res://RespawnMesh.gd" id="8_b0vxu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmwgl"]
@@ -35,6 +36,47 @@ emission_energy_multiplier = 16.0
 height = 1.0
 radius = 2.0
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_g8d15"]
+top_radius = 3.0
+bottom_radius = 3.0
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bqmq"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_052pf"]
+height = 0.5
+radius = 3.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2bb1u"]
+height = 1.0
+radius = 3.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_jow2p"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i7o3f"]
+albedo_color = Color(0, 0, 0.54902, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t26ut"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jtd28"]
+metallic = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_e2h4s"]
+material = SubResource("StandardMaterial3D_jtd28")
+height = 20.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pji7t"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_nru1l"]
+material = SubResource("StandardMaterial3D_pji7t")
+size = Vector3(3, 6, 1)
+
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_77y1m"]
 panorama = ExtResource("6_10jo6")
 
@@ -62,21 +104,23 @@ volumetric_fog_sky_affect = 0.089
 density = -0.0297
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_105sk"]
-size = Vector3(2000, 50, 2000)
+size = Vector3(4000, 50, 4000)
 
 [node name="Level2" type="Node3D"]
 
 [node name="Platforms" type="Node3D" parent="."]
 
-[node name="Circle Platform" type="MeshInstance3D" parent="Platforms"]
-mesh = SubResource("CylinderMesh_1o1hr")
-skeleton = NodePath("../NavigationRegion3D/Levels")
+[node name="Circle Platform" type="Node3D" parent="Platforms"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/Circle Platform"]
+[node name="Circle Platform" type="StaticBody3D" parent="Platforms/Circle Platform"]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Circle Platform/StaticBody3D"]
+[node name="Circle Platform" type="MeshInstance3D" parent="Platforms/Circle Platform/Circle Platform"]
+mesh = SubResource("CylinderMesh_1o1hr")
+skeleton = NodePath("../NavigationRegion3D/Levels")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Circle Platform/Circle Platform"]
 shape = SubResource("CylinderShape3D_awsbr")
 
 [node name="LaunchPlatform" parent="Platforms" instance=ExtResource("1_mihsf")]
@@ -101,21 +145,327 @@ surface_material_override/0 = SubResource("StandardMaterial3D_e4335")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/MovingPlatformA"]
 shape = SubResource("CylinderShape3D_w3q78")
 
-[node name="Circle Platform2" type="MeshInstance3D" parent="Platforms"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -216.559, 93.2359, 1.03118)
-mesh = SubResource("CylinderMesh_1o1hr")
-skeleton = NodePath("../NavigationRegion3D/Levels")
+[node name="LaunchPlatformB" type="Node3D" parent="Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -304.478, 79.146, -20.6467)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/Circle Platform2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/LaunchPlatformB"]
+collision_layer = 2
+script = ExtResource("3_s84ri")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/LaunchPlatformB/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/LaunchPlatformB/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="launcharea" type="Area3D" parent="Platforms/LaunchPlatformB/StaticBody3D"]
+collision_layer = 2
+collision_mask = 65535
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/LaunchPlatformB/StaticBody3D/launcharea"]
+shape = SubResource("CylinderShape3D_2bb1u")
+
+[node name="FakeLaunchPlatform" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -267.291, 85.318, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform2" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -245.043, 85.318, 26.5397)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform2"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform2/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform2/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform3" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -293.988, 85.318, -38.4534)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform3"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform3/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform3/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform4" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -267.291, 85.318, -73.8402)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform4"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform4/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform4/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform5" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -242.839, 85.318, -37.8572)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform5"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform5/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform5/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform6" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -283.111, 85.2854, -20.6899)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform6"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform6/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform6/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform10" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.98777, 0.155917, 0, -0.155917, 0.98777, 0, 0, 0, 1, -240.177, 87.237, -9.83199)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform10"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform10/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform10/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform11" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.982405, 0.186764, 0, -0.186764, 0.982405, 0, 0, 0, 1, -320.224, -38.8017, 1.19383)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform11"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform11/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform11/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform12" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.992167, 0.124918, 0, -0.124918, 0.992167, 0, 0, 0, 1, -512.053, -703.955, 1.19383)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform12"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform12/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform12/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform9" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.995592, 0.0937956, 0, -0.0937956, 0.995592, 0, 0, 0, 1, -355.936, 72.1365, 25.3627)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform9"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform9/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform9/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform8" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99804, 0.0625815, 0, -0.0625815, 0.99804, 0, 0, 0, 1, -331.439, 24.759, -78.3788)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform8"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform8/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform8/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform7" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -305.447, 85.318, 1.19383)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform7"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform7/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform7/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="Circle Platform2" type="Node3D" parent="Platforms"]
+
+[node name="Circle Platform 2" type="StaticBody3D" parent="Platforms/Circle Platform2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -216.559, 93.2359, 1.03118)
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Circle Platform2/StaticBody3D"]
+[node name="Circle Platform2" type="MeshInstance3D" parent="Platforms/Circle Platform2/Circle Platform 2"]
+mesh = SubResource("CylinderMesh_1o1hr")
+skeleton = NodePath("../NavigationRegion3D/Levels")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Circle Platform2/Circle Platform 2"]
 shape = SubResource("CylinderShape3D_awsbr")
+
+[node name="SkyHigh" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.989147, 0, 0.146929, 0, 1, 0, -0.146929, 0, 0.989147, -561.899, 4000, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/SkyHigh"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/SkyHigh/StaticBody3D"]
+mesh = SubResource("BoxMesh_jow2p")
+surface_material_override/0 = SubResource("StandardMaterial3D_i7o3f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/SkyHigh/StaticBody3D"]
+shape = SubResource("BoxShape3D_t26ut")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Platforms/SkyHigh/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.2224, 0)
+mesh = SubResource("CylinderMesh_e2h4s")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Platforms/SkyHigh/StaticBody3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.47035e-08, -1, -4.37114e-08, 0, 3.9968e-15, 0, 1, 2.85632, 18.2854, 0.012764)
+mesh = SubResource("PrismMesh_nru1l")
+
+[node name="FakeLaunchPlatform13" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -333.491, 107.19, 5.86235)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform13"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform13/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform13/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform14" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -342.099, 85.318, -40.0237)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform14"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform14/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform14/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform15" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -267.291, 85.318, -39.6489)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform15"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform15/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform15/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform16" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -316.737, 77.4132, -55.9389)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform16"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform16/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform16/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform17" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -289.961, 85.318, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform17"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform17/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00335693, -0.109192, 0)
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform17/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform18" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -330.713, 96.7749, -12.9755)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform18"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform18/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform18/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform19" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -315.302, 99.5247, 29.6408)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform19"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform19/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform19/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
+
+[node name="FakeLaunchPlatform20" type="Node3D" parent="Platforms"]
+transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -287.656, 88.3559, 48.5931)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/FakeLaunchPlatform20"]
+collision_layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/FakeLaunchPlatform20/StaticBody3D"]
+mesh = SubResource("CylinderMesh_g8d15")
+surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform20/StaticBody3D"]
+shape = SubResource("CylinderShape3D_052pf")
 
 [node name="Player" parent="." instance=ExtResource("2_66pyh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9109, 3.0678, 0.128769)
 visible = false
+floor_max_angle = 1.41372
 camera_sens = 3.0
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -154,6 +504,7 @@ respawn_point = NodePath("../Platforms/Circle Platform")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.1146, 0)
 shape = SubResource("BoxShape3D_105sk")
 
+[connection signal="body_entered" from="Platforms/LaunchPlatformB/StaticBody3D/launcharea" to="Platforms/LaunchPlatformB/StaticBody3D" method="_on_launch_area_body_entered"]
 [connection signal="body_entered" from="RespawnMesh" to="RespawnMesh" method="_on_body_entered"]
 
 [editable path="Player"]

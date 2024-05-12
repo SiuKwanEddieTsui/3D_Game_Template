@@ -31,7 +31,7 @@ var grav_vel: Vector3 # Gravity velocity
 var jump_vel: Vector3 # Jumping velocity
 var air_dash_unlocked: bool = false
 var air_dash_used: bool = false
-var air_dash_speed: float = 20.0  # Adjust this value based on desired dash intensity
+var air_dash_speed: float = 30.0  # Adjust this value based on desired dash intensity
 
 @onready var camera: Camera3D = $Camera
 # At the top of your script

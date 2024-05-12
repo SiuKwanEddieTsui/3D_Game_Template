@@ -6,6 +6,8 @@ var player_entered = false
 signal update_console
 
 func _unhandled_input(_event):
+	if not player_entered:
+		return
 	if Input.is_action_just_pressed("portal") and global.apple_count >= 30:
 		get_tree().change_scene_to_file(level_to_load)
 
