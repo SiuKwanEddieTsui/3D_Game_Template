@@ -134,6 +134,12 @@ visible = false
 [node name="Score" parent="UI/HUD/CenterContainer3" index="1"]
 visible = false
 
+[node name="AirDashIcon" parent="UI/HUD" index="6"]
+offset_left = 269.0
+offset_top = 3.0
+offset_right = 1293.0
+offset_bottom = 1027.0
+
 [node name="Platforms" type="Node3D" parent="."]
 
 [node name="Circle Platform" type="Node3D" parent="Platforms"]
