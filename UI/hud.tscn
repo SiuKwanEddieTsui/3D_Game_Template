@@ -105,9 +105,9 @@ texture = ExtResource("3_82j3h")
 [node name="AirDashIcon" type="TextureRect" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 261.0
-offset_top = -0.999939
-offset_right = 1285.0
-offset_bottom = 1023.0
+offset_left = 260.0
+offset_top = 5.0
+offset_right = 1284.0
+offset_bottom = 1029.0
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_h4w0s")
