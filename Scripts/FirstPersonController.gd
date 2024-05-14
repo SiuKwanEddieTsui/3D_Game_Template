@@ -169,6 +169,7 @@ func _gravity(delta: float) -> Vector3:
 	return grav_vel
 
 func _jump(delta: float) -> Vector3:
+	$jump.play()
 	# Jump logic consolidated here
 	if jumping:
 		if jump_count < jump_max:

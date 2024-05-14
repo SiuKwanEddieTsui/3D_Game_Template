@@ -1,15 +1,10 @@
-[gd_scene load_steps=36 format=3 uid="uid://pilb5gc36doc"]
+[gd_scene load_steps=25 format=3 uid="uid://ddfw6ogpfs24x"]
 
-[ext_resource type="PackedScene" uid="uid://k8xij8cqnksb" path="res://Scenes/launch_platform.tscn" id="1_mihsf"]
-[ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="2_66pyh"]
-[ext_resource type="Script" path="res://Scripts/MovingPlatforms/MovingPlatform.gd" id="2_nq2op"]
-[ext_resource type="Script" path="res://Scripts/LaunchPad/LaunchPadB.gd" id="3_s84ri"]
-[ext_resource type="PackedScene" uid="uid://5j1a8430y5nv" path="res://UI/hud.tscn" id="3_w6rcm"]
-[ext_resource type="Script" path="res://UI/hud2.gd" id="5_67rpe"]
-[ext_resource type="Script" path="res://Scripts/Ending.gd" id="6_bcon0"]
-[ext_resource type="Script" path="res://RespawnMesh.gd" id="8_b0vxu"]
-[ext_resource type="Texture2D" uid="uid://dfj11tuvdloyf" path="res://Textures/Ultimate_Skies_4k_0084.exr" id="8_cc0p6"]
-[ext_resource type="AudioStream" uid="uid://ca8i3yts7ly4v" path="res://Sounds/Awakening Triumph.mp3" id="11_ite0d"]
+[ext_resource type="PackedScene" uid="uid://k8xij8cqnksb" path="res://Scenes/launch_platform.tscn" id="3_qnety"]
+[ext_resource type="Script" path="res://Scripts/MovingPlatforms/MovingPlatform.gd" id="4_4lgsa"]
+[ext_resource type="Script" path="res://Scripts/LaunchPad/LaunchPadB.gd" id="5_2b8jq"]
+[ext_resource type="Script" path="res://Scripts/Ending.gd" id="6_ks4d5"]
+[ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="7_uqk31"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmwgl"]
 emission_enabled = true
@@ -88,63 +83,7 @@ size = Vector3(3, 6, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_et6nv"]
 size = Vector3(50, 2, 50)
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_77y1m"]
-panorama = ExtResource("8_cc0p6")
-
-[sub_resource type="Sky" id="Sky_neyg5"]
-sky_material = SubResource("PanoramaSkyMaterial_77y1m")
-radiance_size = 4
-
-[sub_resource type="Environment" id="Environment_kovb8"]
-background_mode = 2
-background_energy_multiplier = 0.66
-sky = SubResource("Sky_neyg5")
-ambient_light_color = Color(0.266667, 0.486275, 1, 1)
-glow_enabled = true
-glow_intensity = 1.39
-glow_strength = 1.13
-glow_blend_mode = 4
-glow_hdr_scale = 2.17
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.02
-volumetric_fog_sky_affect = 0.089
-
-[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_oqc3u"]
-
-[sub_resource type="FogMaterial" id="FogMaterial_vjgt2"]
-density = -0.0297
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_105sk"]
-size = Vector3(4000, 50, 4000)
-
 [node name="Level2" type="Node3D"]
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="HUD" parent="UI" instance=ExtResource("3_w6rcm")]
-mouse_filter = 2
-script = ExtResource("5_67rpe")
-
-[node name="DoubleJumpUnlockMessage" parent="UI/HUD" index="0"]
-offset_left = 204.0
-offset_top = 182.0
-offset_right = 949.0
-offset_bottom = 270.0
-
-[node name="CenterContainer3" parent="UI/HUD" index="4"]
-visible = false
-
-[node name="TextureRect" parent="UI/HUD/CenterContainer3" index="0"]
-visible = false
-
-[node name="Score" parent="UI/HUD/CenterContainer3" index="1"]
-visible = false
-
-[node name="AirDashIcon" parent="UI/HUD" index="6"]
-offset_left = 269.0
-offset_top = 3.0
-offset_right = 1293.0
-offset_bottom = 1027.0
 
 [node name="Platforms" type="Node3D" parent="."]
 
@@ -160,20 +99,20 @@ mesh = SubResource("CylinderMesh_1o1hr")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Circle Platform/Circle Platform"]
 shape = SubResource("CylinderShape3D_awsbr")
 
-[node name="LaunchPlatform" parent="Platforms" instance=ExtResource("1_mihsf")]
+[node name="LaunchPlatform" parent="Platforms" instance=ExtResource("3_qnety")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8628, 6.58834, 0)
 
-[node name="LaunchPlatform2" parent="Platforms" instance=ExtResource("1_mihsf")]
+[node name="LaunchPlatform2" parent="Platforms" instance=ExtResource("3_qnety")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.1355, 36.7892, 0)
 
-[node name="LaunchPlatform3" parent="Platforms" instance=ExtResource("1_mihsf")]
+[node name="LaunchPlatform3" parent="Platforms" instance=ExtResource("3_qnety")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -113.622, 67.9364, 0)
 
 [node name="MovingPlatformA" type="CharacterBody3D" parent="Platforms"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -182.605, 91.1606, 2.26873)
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("2_nq2op")
+script = ExtResource("4_4lgsa")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/MovingPlatformA"]
 mesh = SubResource("CylinderMesh_0d2ct")
@@ -187,7 +126,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -304.478, 79.146, -20.6467)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Platforms/LaunchPlatformB"]
 collision_layer = 2
-script = ExtResource("3_s84ri")
+script = ExtResource("5_2b8jq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/LaunchPlatformB/StaticBody3D"]
 unique_name_in_owner = true
@@ -395,7 +334,7 @@ mesh = SubResource("PrismMesh_nru1l")
 
 [node name="Area3D" type="Area3D" parent="Platforms/SkyHigh/StaticBody3D"]
 collision_layer = 2
-script = ExtResource("6_bcon0")
+script = ExtResource("6_ks4d5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/SkyHigh/StaticBody3D/Area3D"]
 shape = SubResource("BoxShape3D_et6nv")
@@ -511,48 +450,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform20/StaticBody3D"]
 shape = SubResource("CylinderShape3D_052pf")
 
-[node name="Player" parent="." instance=ExtResource("2_66pyh")]
+[node name="Player" parent="." instance=ExtResource("7_uqk31")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9109, 3.0678, 0.128769)
 floor_max_angle = 1.41372
 camera_sens = 3.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_kovb8")
-camera_attributes = SubResource("CameraAttributesPhysical_oqc3u")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.984939, 0.0562444, 0.163497, 0.00540239, -0.935138, 0.354242, 0.172816, 0.34979, 0.92075, -1.16941, 7.96405, 22.4144)
-light_energy = 0.7
-light_indirect_energy = 0.5
-light_volumetric_fog_energy = 0.5
-shadow_enabled = true
-shadow_bias = 0.0
-directional_shadow_mode = 0
-sky_mode = 1
-
-[node name="FogVolume" type="FogVolume" parent="."]
-size = Vector3(50, 50, 50)
-material = SubResource("FogMaterial_vjgt2")
-
-[node name="RespawnMesh" type="Area3D" parent="." node_paths=PackedStringArray("respawn_point")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -54.3956, 0)
-collision_layer = 0
-script = ExtResource("8_b0vxu")
-respawn_point = NodePath("../Platforms/Circle Platform")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RespawnMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.1146, 0)
-shape = SubResource("BoxShape3D_105sk")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_ite0d")
-volume_db = -18.14
-autoplay = true
-
 [connection signal="body_entered" from="Platforms/LaunchPlatformB/StaticBody3D/launcharea" to="Platforms/LaunchPlatformB/StaticBody3D" method="_on_launch_area_body_entered"]
 [connection signal="area_entered" from="Platforms/SkyHigh/StaticBody3D/Area3D" to="Platforms/SkyHigh/StaticBody3D/Area3D" method="_on_area_entered"]
 [connection signal="body_entered" from="Platforms/SkyHigh/StaticBody3D/Area3D" to="Platforms/SkyHigh/StaticBody3D/Area3D" method="_on_body_entered"]
-[connection signal="body_entered" from="RespawnMesh" to="RespawnMesh" method="_on_body_entered"]
 
-[editable path="UI/HUD"]
 [editable path="Player"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://5j1a8430y5nv"]
 
-[ext_resource type="Texture2D" uid="uid://cf20ewc0o03q0" path="res://Textures/boxicon.png" id="1_1lmyt"]
-[ext_resource type="Texture2D" uid="uid://qtpv40jgob6g" path="res://Textures/Hoop.png" id="2_jivr8"]
-[ext_resource type="Texture2D" uid="uid://cvipxodknps5b" path="res://Textures/DoubleJump.png" id="3_82j3h"]
-[ext_resource type="Texture2D" uid="uid://c5tf3owwtleal" path="res://Textures/AirDash copy.png" id="4_h4w0s"]
+[ext_resource type="Texture2D" uid="uid://bi5x8qwmbciy8" path="res://Textures/boxicon.png" id="1_1lmyt"]
+[ext_resource type="Texture2D" uid="uid://d8gjx48bbpgv" path="res://Textures/Hoop.png" id="2_jivr8"]
+[ext_resource type="Texture2D" uid="uid://c8q6s1vetf4li" path="res://Textures/DoubleJump.png" id="3_82j3h"]
+[ext_resource type="Texture2D" uid="uid://mexe3wo04m3k" path="res://Textures/AirDash copy.png" id="4_h4w0s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ofmsg"]
 font_size = 64
@@ -28,10 +28,10 @@ grow_vertical = 2
 [node name="DoubleJumpUnlockMessage" type="Label" parent="."]
 visible = false
 layout_mode = 2
-offset_left = 203.0
-offset_top = 279.5
-offset_right = 948.0
-offset_bottom = 367.5
+offset_left = 211.0
+offset_top = 193.0
+offset_right = 956.0
+offset_bottom = 281.0
 text = "Double Jump Unlocked!!"
 label_settings = SubResource("LabelSettings_ofmsg")
 horizontal_alignment = 1
