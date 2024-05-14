@@ -35,6 +35,7 @@ var jump_vel: Vector3 # Jumping velocity
 var is_air_dash_unlocked: bool = false
 var air_dash_used: bool = false
 var air_dash_speed: float = 30.0  # Adjust this value based on desired dash intensity
+var Ending_Dialogue = preload("res://Sounds/AscendEndingDialogue.mp3") # Ending Dialogue
 
 @onready var camera: Camera3D = $Camera
 # At the top of your script
@@ -180,3 +181,8 @@ func _jump(delta: float) -> Vector3:
 
 func play_pickup_sound():
 	$pickup.play()
+
+func play_Ending_Dialogue():
+	# Play the sound
+	$Ending_Dialogue.play()
+	

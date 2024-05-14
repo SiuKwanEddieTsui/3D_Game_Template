@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0q0bnia378s4"]
+[gd_scene load_steps=12 format=3 uid="uid://b0q0bnia378s4"]
 
 [ext_resource type="Script" path="res://Scripts/FirstPersonController.gd" id="1_qtton"]
 [ext_resource type="Script" path="res://Scripts/Pickup.gd" id="2_ixhse"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://btb1sucy4t841" path="res://Sounds/Pickup_coin 2.wav" id="5_bo5lm"]
 [ext_resource type="AudioStream" uid="uid://x4tt4w3v00l3" path="res://Sounds/AirDashUnlocked.mp3" id="6_xtr71"]
 [ext_resource type="AudioStream" uid="uid://chdntvevjc43h" path="res://Sounds/DoubleJumpUnlocked.mp3" id="7_771gl"]
+[ext_resource type="AudioStream" uid="uid://bvqbnojs2px0h" path="res://Sounds/AscendEndingDialogue.mp3" id="8_xuvql"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wm1ia"]
 
@@ -64,6 +65,9 @@ stream = ExtResource("6_xtr71")
 
 [node name="DoubleJumpUnlockSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_771gl")
+
+[node name="Ending_Dialogue" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_xuvql")
 
 [connection signal="body_entered" from="Camera/PickupArea" to="Camera/PickupArea" method="_on_body_entered"]
 [connection signal="body_exited" from="Camera/PickupArea" to="Camera/PickupArea" method="_on_body_exited"]

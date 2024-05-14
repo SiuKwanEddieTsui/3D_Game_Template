@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://pilb5gc36doc"]
+[gd_scene load_steps=36 format=3 uid="uid://pilb5gc36doc"]
 
 [ext_resource type="PackedScene" uid="uid://k8xij8cqnksb" path="res://Scenes/launch_platform.tscn" id="1_mihsf"]
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="2_66pyh"]
@@ -6,9 +6,9 @@
 [ext_resource type="Script" path="res://Scripts/LaunchPad/LaunchPadB.gd" id="3_s84ri"]
 [ext_resource type="PackedScene" uid="uid://5j1a8430y5nv" path="res://UI/hud.tscn" id="3_w6rcm"]
 [ext_resource type="Script" path="res://UI/hud2.gd" id="5_67rpe"]
-[ext_resource type="Texture2D" uid="uid://c3t76twlb7wli" path="res://Textures/Rock_Beach_Sunset.exr" id="6_10jo6"]
+[ext_resource type="Script" path="res://Scripts/Ending.gd" id="6_bcon0"]
 [ext_resource type="Script" path="res://RespawnMesh.gd" id="8_b0vxu"]
-[ext_resource type="PackedScene" uid="uid://cxmxeg5w86lmc" path="res://Scenes/Components/collectibles.tscn" id="10_qbad2"]
+[ext_resource type="Texture2D" uid="uid://br1oxqu4wkcoc" path="res://Textures/Ultimate_Skies_4k_0084.exr" id="8_cc0p6"]
 [ext_resource type="AudioStream" uid="uid://bovx526p61y2y" path="res://Sounds/Awakening Triumph.mp3" id="11_ite0d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmwgl"]
@@ -85,8 +85,11 @@ albedo_color = Color(1, 0, 0, 1)
 material = SubResource("StandardMaterial3D_pji7t")
 size = Vector3(3, 6, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_et6nv"]
+size = Vector3(50, 2, 50)
+
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_77y1m"]
-panorama = ExtResource("6_10jo6")
+panorama = ExtResource("8_cc0p6")
 
 [sub_resource type="Sky" id="Sky_neyg5"]
 sky_material = SubResource("PanoramaSkyMaterial_77y1m")
@@ -380,6 +383,19 @@ mesh = SubResource("CylinderMesh_e2h4s")
 transform = Transform3D(-4.37114e-08, 1, -4.47035e-08, -1, -4.37114e-08, 0, 3.9968e-15, 0, 1, 2.85632, 18.2854, 0.012764)
 mesh = SubResource("PrismMesh_nru1l")
 
+[node name="Area3D" type="Area3D" parent="Platforms/SkyHigh/StaticBody3D"]
+collision_layer = 2
+script = ExtResource("6_bcon0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/SkyHigh/StaticBody3D/Area3D"]
+shape = SubResource("BoxShape3D_et6nv")
+
+[node name="cooldown_timer" type="Timer" parent="Platforms/SkyHigh/StaticBody3D/Area3D"]
+wait_time = 90.0
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Platforms/SkyHigh/StaticBody3D"]
+
 [node name="FakeLaunchPlatform13" type="Node3D" parent="Platforms"]
 transform = Transform3D(0.99951, 0.0313061, 0, -0.0313061, 0.99951, 0, 0, 0, 1, -333.491, 107.19, 5.86235)
 
@@ -518,32 +534,14 @@ respawn_point = NodePath("../Platforms/Circle Platform")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.1146, 0)
 shape = SubResource("BoxShape3D_105sk")
 
-[node name="Collectibles" type="Node3D" parent="."]
-
-[node name="Collectibles6" parent="Collectibles" instance=ExtResource("10_qbad2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96872, 1.79826, 5.33654)
-
-[node name="Collectibles5" parent="Collectibles" instance=ExtResource("10_qbad2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.44769, 1.53742, -1.98123)
-
-[node name="Collectibles4" parent="Collectibles" instance=ExtResource("10_qbad2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.67155, 1.57669, 2.17292)
-
-[node name="Collectibles3" parent="Collectibles" instance=ExtResource("10_qbad2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38897, 1.71659, 2.59557)
-
-[node name="Collectibles2" parent="Collectibles" instance=ExtResource("10_qbad2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.56516, 1.56046, -0.600842)
-
-[node name="Collectibles" parent="Collectibles" instance=ExtResource("10_qbad2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51616, 1.52984, -4.15415)
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_ite0d")
 volume_db = -18.14
 autoplay = true
 
 [connection signal="body_entered" from="Platforms/LaunchPlatformB/StaticBody3D/launcharea" to="Platforms/LaunchPlatformB/StaticBody3D" method="_on_launch_area_body_entered"]
+[connection signal="area_entered" from="Platforms/SkyHigh/StaticBody3D/Area3D" to="Platforms/SkyHigh/StaticBody3D/Area3D" method="_on_area_entered"]
+[connection signal="body_entered" from="Platforms/SkyHigh/StaticBody3D/Area3D" to="Platforms/SkyHigh/StaticBody3D/Area3D" method="_on_body_entered"]
 [connection signal="body_entered" from="RespawnMesh" to="RespawnMesh" method="_on_body_entered"]
 
 [editable path="UI/HUD"]

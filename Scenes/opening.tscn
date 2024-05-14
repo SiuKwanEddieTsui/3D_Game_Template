@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dcwb12x2k1r73"]
 
-[ext_resource type="Texture2D" uid="uid://drps8gc21ym1l" path="res://Textures/TitleScreen.jpg" id="1_i1lin"]
+[ext_resource type="Texture2D" uid="uid://t3yuuvmuijy4" path="res://Textures/TitleScreen.jpg" id="1_i1lin"]
 [ext_resource type="Script" path="res://Scripts/opening.gd" id="1_ib3qd"]
-[ext_resource type="AudioStream" uid="uid://ccik861grd56o" path="res://Sounds/Ascend (Rise Above).mp3" id="3_2pxmt"]
-[ext_resource type="AudioStream" uid="uid://0f60a78dagpr" path="res://Sounds/ElevenLabs_2024-04-12T08_19_33_Callum_pre_s50_sb75_m1.mp3" id="4_mviqd"]
+[ext_resource type="AudioStream" uid="uid://dmiba3ipx644u" path="res://Sounds/Ascend (Rise Above).mp3" id="3_2pxmt"]
+[ext_resource type="AudioStream" uid="uid://cv52lonryaa4c" path="res://Sounds/ElevenLabs_2024-04-12T08_19_33_Callum_pre_s50_sb75_m1.mp3" id="4_mviqd"]
 
 [node name="Opening" type="Control"]
 clip_contents = true
@@ -36,3 +36,13 @@ autoplay = true
 stream = ExtResource("4_mviqd")
 volume_db = -5.535
 autoplay = true
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 2
+offset_left = 18.0
+offset_top = 17.0
+offset_right = 237.0
+offset_bottom = 117.0
+theme_override_font_sizes/font_size = 28
+text = "Skip = Spacebar
+            Left Click"

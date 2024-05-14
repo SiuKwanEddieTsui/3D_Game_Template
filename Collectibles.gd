@@ -1,7 +1,7 @@
 extends Area3D
 
 var is_collected = false
-@onready var player = $Player
+@onready var player = $"../../Player"
 signal item_collected
 
 

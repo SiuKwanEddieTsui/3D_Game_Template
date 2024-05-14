@@ -1,7 +1,6 @@
-[gd_scene load_steps=101 format=3 uid="uid://bgjxqnbwa01lc"]
+[gd_scene load_steps=100 format=3 uid="uid://bgjxqnbwa01lc"]
 
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_4vkqj"]
-[ext_resource type="PackedScene" uid="uid://cmd1up44piqcg" path="res://Scenes/UI.tscn" id="1_pbilb"]
 [ext_resource type="PackedScene" uid="uid://jfqgr2skttks" path="res://pigeon.glb" id="1_qc7lr"]
 [ext_resource type="PackedScene" uid="uid://5j1a8430y5nv" path="res://UI/hud.tscn" id="1_rye3p"]
 [ext_resource type="PackedScene" uid="uid://buop3rxr2eopd" path="res://Scenes/Components/tree.tscn" id="2_3y2d8"]
@@ -326,8 +325,6 @@ metadata/_edit_lock_ = true
 [node name="HUD" parent="UI" instance=ExtResource("1_rye3p")]
 mouse_filter = 2
 script = ExtResource("2_nnu7i")
-
-[node name="Splash Menu" parent="." instance=ExtResource("1_pbilb")]
 
 [node name="Hoops" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.3064, 8.56381, -13.5393)

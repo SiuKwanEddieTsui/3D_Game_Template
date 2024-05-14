@@ -46,3 +46,6 @@ func _on_area_3d_body_entered(body):
 	if body.is_in_group("Player") and not push_timer.is_stopped():
 		push_player(body)
 		push_timer.start() # Reset the timer after pushing
+
+
+
