@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="1_4vkqj"]
 [ext_resource type="PackedScene" uid="uid://cmd1up44piqcg" path="res://Scenes/UI.tscn" id="1_pbilb"]
-[ext_resource type="PackedScene" uid="uid://o6d5wnjrrxs" path="res://pigeon.glb" id="1_qc7lr"]
+[ext_resource type="PackedScene" uid="uid://jfqgr2skttks" path="res://pigeon.glb" id="1_qc7lr"]
 [ext_resource type="PackedScene" uid="uid://5j1a8430y5nv" path="res://UI/hud.tscn" id="1_rye3p"]
 [ext_resource type="PackedScene" uid="uid://buop3rxr2eopd" path="res://Scenes/Components/tree.tscn" id="2_3y2d8"]
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="2_nnu7i"]
 [ext_resource type="Script" path="res://addons/csg_mesher/src/CSGMesher.gd" id="3_e68ao"]
 [ext_resource type="Material" uid="uid://b7st3o5jvnu23" path="res://Materials/GreenGrid.tres" id="3_j0rpj"]
-[ext_resource type="Texture2D" uid="uid://cmj0adv4q81mr" path="res://Textures/Ultimate_Skies_4k_0069_sm.exr" id="5_ywnym"]
+[ext_resource type="Texture2D" uid="uid://b1wl3m3s5ipsk" path="res://Textures/Ultimate_Skies_4k_0069_sm.exr" id="5_ywnym"]
 [ext_resource type="Script" path="res://RespawnMesh.gd" id="6_nxx8h"]
 [ext_resource type="PackedScene" uid="uid://cxmxeg5w86lmc" path="res://Scenes/Components/collectibles.tscn" id="7_oy3bs"]
 [ext_resource type="Script" path="res://Scripts/EnemyNav.gd" id="8_jb04y"]
@@ -23,8 +23,7 @@
 [ext_resource type="Script" path="res://Scripts/UnlockablePlatforms/UnlockablePlatform3.gd" id="13_4y1ql"]
 [ext_resource type="Script" path="res://Scripts/UnlockablePlatforms/UnlockablePlatform4.gd" id="14_hmjxl"]
 [ext_resource type="PackedScene" uid="uid://k8xij8cqnksb" path="res://Scenes/launch_platform.tscn" id="15_bbyoq"]
-[ext_resource type="AudioStream" uid="uid://ca8i3yts7ly4v" path="res://Sounds/Awakening Triumph.mp3" id="19_s38lw"]
-[ext_resource type="Script" path="res://Scripts/MovingPlatforms/MovingPlatform.gd" id="20_qorvi"]
+[ext_resource type="AudioStream" uid="uid://bovx526p61y2y" path="res://Sounds/Awakening Triumph.mp3" id="19_s38lw"]
 [ext_resource type="Script" path="res://Scripts/MovingPlatforms/MovingPlatformB.gd" id="21_pekph"]
 [ext_resource type="Script" path="res://Scripts/MovingPlatforms/MovingPlatformC3.gd" id="22_5gdu3"]
 [ext_resource type="Script" path="res://Scripts/MovingPlatforms/MovingPlatformVertical.gd" id="23_jd2ah"]
@@ -218,14 +217,15 @@ emission_energy_multiplier = 16.0
 backlight_enabled = true
 backlight = Color(1, 1, 1, 1)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2uryh"]
-points = PackedVector3Array(0.458837, 0.08909, 2.44741, -0.459462, -0.0637692, -2.44984, -0.459001, 0.0890893, -2.44738, 2.44991, -0.0637562, -0.458998, -1.47722, -0.873917, 1.03383, -1.93595, 0.831861, 0.148803, 1.61008, 0.891079, -0.512117, 1.77486, -0.874938, -0.295589, -1.63975, -0.732799, -1.34173, -0.746403, 0.758834, 1.93976, 1.34183, -0.732671, 1.63986, 1.86672, 0.610071, 1.269, 1.2785, -0.513714, -1.95518, 0.746257, 0.758846, -1.93979, -2.20718, -0.139485, 1.14142, -2.03522, 0.38966, -1.28132, -0.827922, -0.514137, 2.1826, -0.295499, -0.875015, -1.77462, -0.960978, 0.826006, -1.70017, -2.43983, -0.292259, -0.152389, 0.511903, 0.891115, 1.60977, 2.12328, -0.290539, 1.21319, 1.58353, 0.238985, -1.88553, -1.50342, 0.388614, 1.87921, 0.295348, -0.875019, 1.77462, 2.09858, 0.612292, -0.82395, -2.34438, 0.466541, 0.302265, -1.46099, 0.889576, -0.876477, -1.51124, -0.365173, -1.88899, 1.36653, 0.240461, 2.04905, 2.34441, 0.466488, 0.30223, -1.77496, -0.874913, -0.295581)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yks3i"]
+points = PackedVector3Array(-0.365085, -0.0873209, -1.94865, -0.364647, 0.0951479, -1.94631, -1.94865, -0.0873209, 0.365085, 1.84122, -0.28169, 0.634821, 1.77758, 0.289627, -0.761706, -1.84122, 0.289627, -0.57118, -1.01587, -0.28169, 1.65069, 0.634821, -0.28169, -1.84122, -1.65069, -0.28169, -1.01587, -1.26964, 0.289627, 1.46017, 1.65069, 0.289627, 1.01587, 0.634821, -0.28169, 1.84122, 0.57118, 0.289627, -1.84122, 1.65069, -0.28169, -1.01587, -1.01587, 0.289627, -1.65069, -0.253769, 0.289627, 1.90446, -1.84122, -0.28169, 0.634821, -1.01587, -0.28169, -1.65069, 1.2067, 0.0944321, -1.56887, 1.94631, 0.0951479, -0.364647, -1.77758, 0.289627, 0.761706, 1.20815, -0.0866039, 1.57074, 1.01587, 0.289627, 1.65069, -0.365085, -0.0873209, 1.94865, 1.90446, 0.289627, 0.253769, -1.57074, -0.0866039, 1.20815, -1.90446, -0.28169, -0.317411, -1.56887, 0.0944321, -1.2067, 1.90446, -0.28169, -0.317411, 0.364647, 0.0951479, 1.94631, -0.909612, 0.0948903, 1.75881, 1.65069, -0.28169, 1.01587)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_eluh1"]
-points = PackedVector3Array(0.458837, 0.08909, 2.44741, -0.459462, -0.0637692, -2.44984, -0.459001, 0.0890893, -2.44738, 2.44991, -0.0637562, -0.458998, -1.47722, -0.873917, 1.03383, -1.93595, 0.831861, 0.148803, 1.61008, 0.891079, -0.512117, 1.77486, -0.874938, -0.295589, -1.63975, -0.732799, -1.34173, -0.746403, 0.758834, 1.93976, 1.34183, -0.732671, 1.63986, 1.86672, 0.610071, 1.269, 1.2785, -0.513714, -1.95518, 0.746257, 0.758846, -1.93979, -2.20718, -0.139485, 1.14142, -2.03522, 0.38966, -1.28132, -0.827922, -0.514137, 2.1826, -0.295499, -0.875015, -1.77462, -0.960978, 0.826006, -1.70017, -2.43983, -0.292259, -0.152389, 0.511903, 0.891115, 1.60977, 2.12328, -0.290539, 1.21319, 1.58353, 0.238985, -1.88553, -1.50342, 0.388614, 1.87921, 0.295348, -0.875019, 1.77462, 2.09858, 0.612292, -0.82395, -2.34438, 0.466541, 0.302265, -1.46099, 0.889576, -0.876477, -1.51124, -0.365173, -1.88899, 1.36653, 0.240461, 2.04905, 2.34441, 0.466488, 0.30223, -1.77496, -0.874913, -0.295581)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_40rd5"]
+height = 0.5
+radius = 2.0
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_bw01b"]
-points = PackedVector3Array(0.458837, 0.08909, 2.44741, -0.459462, -0.0637692, -2.44984, -0.459001, 0.0890893, -2.44738, 2.44991, -0.0637562, -0.458998, -1.47722, -0.873917, 1.03383, -1.93595, 0.831861, 0.148803, 1.61008, 0.891079, -0.512117, 1.77486, -0.874938, -0.295589, -1.63975, -0.732799, -1.34173, -0.746403, 0.758834, 1.93976, 1.34183, -0.732671, 1.63986, 1.86672, 0.610071, 1.269, 1.2785, -0.513714, -1.95518, 0.746257, 0.758846, -1.93979, -2.20718, -0.139485, 1.14142, -2.03522, 0.38966, -1.28132, -0.827922, -0.514137, 2.1826, -0.295499, -0.875015, -1.77462, -0.960978, 0.826006, -1.70017, -2.43983, -0.292259, -0.152389, 0.511903, 0.891115, 1.60977, 2.12328, -0.290539, 1.21319, 1.58353, 0.238985, -1.88553, -1.50342, 0.388614, 1.87921, 0.295348, -0.875019, 1.77462, 2.09858, 0.612292, -0.82395, -2.34438, 0.466541, 0.302265, -1.46099, 0.889576, -0.876477, -1.51124, -0.365173, -1.88899, 1.36653, 0.240461, 2.04905, 2.34441, 0.466488, 0.30223, -1.77496, -0.874913, -0.295581)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hrp8p"]
+points = PackedVector3Array(-0.365085, -0.0873209, -1.94865, -0.364647, 0.0951479, -1.94631, -1.94865, -0.0873209, 0.365085, 1.84122, -0.28169, 0.634821, 1.77758, 0.289627, -0.761706, -1.84122, 0.289627, -0.57118, -1.01587, -0.28169, 1.65069, 0.634821, -0.28169, -1.84122, -1.65069, -0.28169, -1.01587, -1.26964, 0.289627, 1.46017, 1.65069, 0.289627, 1.01587, 0.634821, -0.28169, 1.84122, 0.57118, 0.289627, -1.84122, 1.65069, -0.28169, -1.01587, -1.01587, 0.289627, -1.65069, -0.253769, 0.289627, 1.90446, -1.84122, -0.28169, 0.634821, -1.01587, -0.28169, -1.65069, 1.2067, 0.0944321, -1.56887, 1.94631, 0.0951479, -0.364647, -1.77758, 0.289627, 0.761706, 1.20815, -0.0866039, 1.57074, 1.01587, 0.289627, 1.65069, -0.365085, -0.0873209, 1.94865, 1.90446, 0.289627, 0.253769, -1.57074, -0.0866039, 1.20815, -1.90446, -0.28169, -0.317411, -1.56887, 0.0944321, -1.2067, 1.90446, -0.28169, -0.317411, 0.364647, 0.0951479, 1.94631, -0.909612, 0.0948903, 1.75881, 1.65069, -0.28169, 1.01587)
 
 [sub_resource type="TorusMesh" id="TorusMesh_81dew"]
 
@@ -290,6 +290,10 @@ emission = Color(0, 0, 1, 1)
 emission_energy_multiplier = 16.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gkwvh"]
+height = 1.0
+radius = 2.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_424tk"]
 height = 1.0
 radius = 2.0
 
@@ -764,12 +768,13 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Rings/Ring/MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_2uryh")
+shape = SubResource("ConvexPolygonShape3D_yks3i")
 
 [node name="Ring3" type="Node3D" parent="Rings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.08861, 2.21577, 9.02511)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Rings/Ring3"]
+layers = 2
 mesh = SubResource("TorusMesh_5u8ur")
 surface_material_override/0 = SubResource("StandardMaterial3D_vyqm5")
 
@@ -778,7 +783,7 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Rings/Ring3/MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_eluh1")
+shape = SubResource("CylinderShape3D_40rd5")
 
 [node name="Ring5" type="Node3D" parent="Rings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.7123, 6.02571, 13.7412)
@@ -792,7 +797,7 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Rings/Ring5/MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_bw01b")
+shape = SubResource("ConvexPolygonShape3D_hrp8p")
 
 [node name="Ring2" type="Node3D" parent="Rings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.961429, 1.47051, 5.27825)
@@ -1266,18 +1271,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3074, 11.2959, -16.5657)
 [node name="ball20" parent="Physics objects" instance=ExtResource("11_2mjts")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.1837, 11.3972, -7.39084)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("19_s38lw")
-volume_db = -18.794
-autoplay = true
-
 [node name="MovingPlatforms" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.2036, 22.6842, 31.0668)
 
 [node name="MovingPlatformA" type="CharacterBody3D" parent="MovingPlatforms"]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("20_qorvi")
+slide_on_ceiling = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/MovingPlatformA"]
 mesh = SubResource("CylinderMesh_tr756")
@@ -1286,11 +1286,16 @@ surface_material_override/0 = SubResource("StandardMaterial3D_x2itl")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/MovingPlatformA"]
 shape = SubResource("CylinderShape3D_gkwvh")
 
+[node name="Area3D" type="Area3D" parent="MovingPlatforms/MovingPlatformA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.2036, -22.6842, -31.0668)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/MovingPlatformA/Area3D"]
+shape = SubResource("CylinderShape3D_424tk")
+
 [node name="MovingPlatformA2" type="CharacterBody3D" parent="MovingPlatforms"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.1714, 8.11531, 0)
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("20_qorvi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/MovingPlatformA2"]
 mesh = SubResource("CylinderMesh_tr756")
@@ -1298,6 +1303,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_x2itl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/MovingPlatformA2"]
 shape = SubResource("CylinderShape3D_gkwvh")
+
+[node name="Area3D" type="Area3D" parent="MovingPlatforms/MovingPlatformA2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.2036, -22.6842, -31.0668)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/MovingPlatformA2/Area3D"]
+shape = SubResource("CylinderShape3D_424tk")
 
 [node name="MovingPlatformB" type="CharacterBody3D" parent="MovingPlatforms"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2915, 4.40649, -0.00304794)
@@ -1357,6 +1368,11 @@ shape = SubResource("CylinderShape3D_02peh")
 
 [node name="Castle" parent="." instance=ExtResource("29_yfghr")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -195.075, 47.314, -2.94453)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_s38lw")
+volume_db = -18.529
+autoplay = true
 
 [connection signal="update_console" from="Player/Camera/PickupArea" to="UI/HUD" method="_on_pickup_area_update_console"]
 [connection signal="body_entered" from="RespawnMesh" to="RespawnMesh" method="_on_body_entered"]
@@ -1457,6 +1473,10 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -195.0
 [connection signal="item_collected" from="collectibles/Collectibles95" to="UI/HUD" method="_on_collectibles_item_collected"]
 [connection signal="item_collected" from="collectibles/Collectibles96" to="UI/HUD" method="_on_collectibles_item_collected"]
 [connection signal="item_collected" from="collectibles/Collectibles97" to="UI/HUD" method="_on_collectibles_item_collected"]
+[connection signal="body_entered" from="MovingPlatforms/MovingPlatformA/Area3D" to="MovingPlatforms/MovingPlatformA" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="MovingPlatforms/MovingPlatformA/Area3D" to="MovingPlatforms/MovingPlatformA" method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="MovingPlatforms/MovingPlatformA2/Area3D" to="MovingPlatforms/MovingPlatformA" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="MovingPlatforms/MovingPlatformA2/Area3D" to="MovingPlatforms/MovingPlatformA" method="_on_area_3d_body_exited"]
 
 [editable path="pigeon"]
 [editable path="Player"]

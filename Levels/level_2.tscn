@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://pilb5gc36doc"]
+[gd_scene load_steps=35 format=3 uid="uid://pilb5gc36doc"]
 
 [ext_resource type="PackedScene" uid="uid://k8xij8cqnksb" path="res://Scenes/launch_platform.tscn" id="1_mihsf"]
 [ext_resource type="PackedScene" uid="uid://b0q0bnia378s4" path="res://Scenes/Player.tscn" id="2_66pyh"]
@@ -6,9 +6,10 @@
 [ext_resource type="Script" path="res://Scripts/LaunchPad/LaunchPadB.gd" id="3_s84ri"]
 [ext_resource type="PackedScene" uid="uid://5j1a8430y5nv" path="res://UI/hud.tscn" id="3_w6rcm"]
 [ext_resource type="Script" path="res://UI/hud2.gd" id="5_67rpe"]
-[ext_resource type="PackedScene" uid="uid://cmd1up44piqcg" path="res://Scenes/UI.tscn" id="5_t7xll"]
-[ext_resource type="Texture2D" uid="uid://du27gjhclmtd0" path="res://Textures/Rock_Beach_Sunset.exr" id="6_10jo6"]
+[ext_resource type="Texture2D" uid="uid://c3t76twlb7wli" path="res://Textures/Rock_Beach_Sunset.exr" id="6_10jo6"]
 [ext_resource type="Script" path="res://RespawnMesh.gd" id="8_b0vxu"]
+[ext_resource type="PackedScene" uid="uid://cxmxeg5w86lmc" path="res://Scenes/Components/collectibles.tscn" id="10_qbad2"]
+[ext_resource type="AudioStream" uid="uid://bovx526p61y2y" path="res://Sounds/Awakening Triumph.mp3" id="11_ite0d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmwgl"]
 emission_enabled = true
@@ -36,15 +37,17 @@ emission_energy_multiplier = 16.0
 height = 1.0
 radius = 2.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v780w"]
+albedo_color = Color(0.956863, 0.823529, 0, 0)
+emission_enabled = true
+emission = Color(1, 1, 0.576471, 1)
+emission_energy_multiplier = 16.0
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_g8d15"]
+material = SubResource("StandardMaterial3D_v780w")
 top_radius = 3.0
 bottom_radius = 3.0
 height = 0.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bqmq"]
-albedo_color = Color(1, 1, 0, 1)
-emission_enabled = true
-emission = Color(0, 1, 0, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_052pf"]
 height = 0.5
@@ -53,6 +56,11 @@ radius = 3.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2bb1u"]
 height = 1.0
 radius = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bqmq"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_jow2p"]
 size = Vector3(50, 1, 50)
@@ -108,6 +116,21 @@ size = Vector3(4000, 50, 4000)
 
 [node name="Level2" type="Node3D"]
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UI" instance=ExtResource("3_w6rcm")]
+mouse_filter = 2
+script = ExtResource("5_67rpe")
+
+[node name="CenterContainer3" parent="UI/HUD" index="4"]
+visible = false
+
+[node name="TextureRect" parent="UI/HUD/CenterContainer3" index="0"]
+visible = false
+
+[node name="Score" parent="UI/HUD/CenterContainer3" index="1"]
+visible = false
+
 [node name="Platforms" type="Node3D" parent="."]
 
 [node name="Circle Platform" type="Node3D" parent="Platforms"]
@@ -153,8 +176,8 @@ collision_layer = 2
 script = ExtResource("3_s84ri")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/LaunchPlatformB/StaticBody3D"]
+unique_name_in_owner = true
 mesh = SubResource("CylinderMesh_g8d15")
-surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/LaunchPlatformB/StaticBody3D"]
 shape = SubResource("CylinderShape3D_052pf")
@@ -464,17 +487,8 @@ shape = SubResource("CylinderShape3D_052pf")
 
 [node name="Player" parent="." instance=ExtResource("2_66pyh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9109, 3.0678, 0.128769)
-visible = false
 floor_max_angle = 1.41372
 camera_sens = 3.0
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="HUD" parent="UI" instance=ExtResource("3_w6rcm")]
-mouse_filter = 2
-script = ExtResource("5_67rpe")
-
-[node name="Splash Menu" parent="." instance=ExtResource("5_t7xll")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kovb8")
@@ -504,7 +518,33 @@ respawn_point = NodePath("../Platforms/Circle Platform")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.1146, 0)
 shape = SubResource("BoxShape3D_105sk")
 
+[node name="Collectibles" type="Node3D" parent="."]
+
+[node name="Collectibles6" parent="Collectibles" instance=ExtResource("10_qbad2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96872, 1.79826, 5.33654)
+
+[node name="Collectibles5" parent="Collectibles" instance=ExtResource("10_qbad2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.44769, 1.53742, -1.98123)
+
+[node name="Collectibles4" parent="Collectibles" instance=ExtResource("10_qbad2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.67155, 1.57669, 2.17292)
+
+[node name="Collectibles3" parent="Collectibles" instance=ExtResource("10_qbad2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38897, 1.71659, 2.59557)
+
+[node name="Collectibles2" parent="Collectibles" instance=ExtResource("10_qbad2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.56516, 1.56046, -0.600842)
+
+[node name="Collectibles" parent="Collectibles" instance=ExtResource("10_qbad2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51616, 1.52984, -4.15415)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_ite0d")
+volume_db = -18.14
+autoplay = true
+
 [connection signal="body_entered" from="Platforms/LaunchPlatformB/StaticBody3D/launcharea" to="Platforms/LaunchPlatformB/StaticBody3D" method="_on_launch_area_body_entered"]
 [connection signal="body_entered" from="RespawnMesh" to="RespawnMesh" method="_on_body_entered"]
 
+[editable path="UI/HUD"]
 [editable path="Player"]

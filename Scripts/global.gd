@@ -1,5 +1,7 @@
 extends Node
 
-# counter for apple collectible
+# Keeps track of the number of apples collected
 var apple_count = 0
-# reference with global.apple_count
+
+func _ready():
+	print("Global script loaded, apple count is ", apple_count)

@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0q0bnia378s4"]
+[gd_scene load_steps=11 format=3 uid="uid://b0q0bnia378s4"]
 
 [ext_resource type="Script" path="res://Scripts/FirstPersonController.gd" id="1_qtton"]
 [ext_resource type="Script" path="res://Scripts/Pickup.gd" id="2_ixhse"]
-[ext_resource type="AudioStream" uid="uid://bg1wc1jbid388" path="res://Sounds/Jump 1.wav" id="3_rydab"]
-[ext_resource type="AudioStream" uid="uid://ve8rx5c6lyyg" path="res://Sounds/Laser_shoot 1.wav" id="4_ye0h8"]
-[ext_resource type="AudioStream" uid="uid://ci3gq155bg35x" path="res://Sounds/Pickup_coin 2.wav" id="5_bo5lm"]
+[ext_resource type="AudioStream" uid="uid://coqi2s4lk054g" path="res://Sounds/Jump 1.wav" id="3_rydab"]
+[ext_resource type="AudioStream" uid="uid://bu7e53uu4vjcc" path="res://Sounds/Laser_shoot 1.wav" id="4_ye0h8"]
+[ext_resource type="AudioStream" uid="uid://btb1sucy4t841" path="res://Sounds/Pickup_coin 2.wav" id="5_bo5lm"]
+[ext_resource type="AudioStream" uid="uid://x4tt4w3v00l3" path="res://Sounds/AirDashUnlocked.mp3" id="6_xtr71"]
+[ext_resource type="AudioStream" uid="uid://chdntvevjc43h" path="res://Sounds/DoubleJumpUnlocked.mp3" id="7_771gl"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wm1ia"]
 
@@ -15,7 +17,6 @@ size = Vector3(1.521, 1.94824, 1.8916)
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_mask = 6
-floor_stop_on_slope = false
 script = ExtResource("1_qtton")
 jump_height = 3.0
 
@@ -57,6 +58,12 @@ volume_db = -41.802
 [node name="walk" type="AudioStreamPlayer3D" parent="."]
 
 [node name="DashTimer" type="Timer" parent="."]
+
+[node name="AirDashUnlockSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_xtr71")
+
+[node name="DoubleJumpUnlockSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_771gl")
 
 [connection signal="body_entered" from="Camera/PickupArea" to="Camera/PickupArea" method="_on_body_entered"]
 [connection signal="body_exited" from="Camera/PickupArea" to="Camera/PickupArea" method="_on_body_exited"]

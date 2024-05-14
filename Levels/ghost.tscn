@@ -2,15 +2,19 @@
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_3c384"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_jtddx"]
+[sub_resource type="SphereMesh" id="SphereMesh_h502m"]
+radius = 2.0
+height = 4.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnbbn"]
 albedo_color = Color(1, 0, 0, 1)
 metallic = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_igo1s"]
+radius = 2.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hgl6i"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_ipuyx"]
+radius = 2.0
 
 [node name="Ghost" type="CharacterBody3D" groups=["enemies"]]
 collision_layer = 32
@@ -18,19 +22,24 @@ collision_mask = 2
 script = ExtResource("1_3c384")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.13739, 0.524566, -0.251491)
-mesh = SubResource("BoxMesh_jtddx")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27135, 0)
+mesh = SubResource("SphereMesh_h502m")
 surface_material_override/0 = SubResource("StandardMaterial3D_vnbbn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(90, 0, 0, 0, 90, 0, 0, 0, 90, -0.13739, 0.524566, -0.251491)
+transform = Transform3D(90, 0, 0, 0, 90, 0, 0, 0, 90, 0, 1.27135, 0)
 shape = SubResource("SphereShape3D_igo1s")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27135, 0)
+collision_mask = 11
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("BoxShape3D_hgl6i")
+shape = SubResource("SphereShape3D_ipuyx")
+
+[node name="PushTimer" type="Timer" parent="."]
+wait_time = 3.0
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
