@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://UI/hud2.gd" id="5_67rpe"]
 [ext_resource type="Script" path="res://Scripts/Ending.gd" id="6_bcon0"]
 [ext_resource type="Script" path="res://RespawnMesh.gd" id="8_b0vxu"]
-[ext_resource type="Texture2D" uid="uid://dfj11tuvdloyf" path="res://Textures/Ultimate_Skies_4k_0084.exr" id="8_cc0p6"]
-[ext_resource type="AudioStream" uid="uid://ca8i3yts7ly4v" path="res://Sounds/Awakening Triumph.mp3" id="11_ite0d"]
+[ext_resource type="Texture2D" uid="uid://br1oxqu4wkcoc" path="res://Textures/Ultimate_Skies_4k_0084.exr" id="8_cc0p6"]
+[ext_resource type="AudioStream" uid="uid://bovx526p61y2y" path="res://Sounds/Awakening Triumph.mp3" id="11_ite0d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmwgl"]
 emission_enabled = true
@@ -164,10 +164,10 @@ shape = SubResource("CylinderShape3D_awsbr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8628, 6.58834, 0)
 
 [node name="LaunchPlatform2" parent="Platforms" instance=ExtResource("1_mihsf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.1355, 36.7892, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.0688, 20.0834, 0)
 
 [node name="LaunchPlatform3" parent="Platforms" instance=ExtResource("1_mihsf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -113.622, 67.9364, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -71.1111, 38.1389, 0)
 
 [node name="MovingPlatformA" type="CharacterBody3D" parent="Platforms"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -182.605, 91.1606, 2.26873)
@@ -510,6 +510,24 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0bqmq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/FakeLaunchPlatform20/StaticBody3D"]
 shape = SubResource("CylinderShape3D_052pf")
+
+[node name="LaunchPlatform4" parent="Platforms" instance=ExtResource("1_mihsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -290.694, 81.6904, -60.0496)
+
+[node name="LaunchPlatform5" parent="Platforms" instance=ExtResource("1_mihsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -291.132, 69.4554, 13.7331)
+
+[node name="LaunchPlatform6" parent="Platforms" instance=ExtResource("1_mihsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -256.995, 85.8293, 0)
+
+[node name="LaunchPlatform7" parent="Platforms" instance=ExtResource("1_mihsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -170.994, 85.2556, 0)
+
+[node name="LaunchPlatform8" parent="Platforms" instance=ExtResource("1_mihsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138.443, 68.3635, 0)
+
+[node name="LaunchPlatform9" parent="Platforms" instance=ExtResource("1_mihsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -107.542, 52.7853, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_66pyh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9109, 3.0678, 0.128769)

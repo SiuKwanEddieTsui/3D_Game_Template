@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/FirstPersonController.gd" id="1_qtton"]
 [ext_resource type="Script" path="res://Scripts/Pickup.gd" id="2_ixhse"]
-[ext_resource type="AudioStream" uid="uid://bg1wc1jbid388" path="res://Sounds/Jump 1.wav" id="3_rydab"]
-[ext_resource type="AudioStream" uid="uid://ve8rx5c6lyyg" path="res://Sounds/Laser_shoot 1.wav" id="4_ye0h8"]
-[ext_resource type="AudioStream" uid="uid://ci3gq155bg35x" path="res://Sounds/Pickup_coin 2.wav" id="5_bo5lm"]
-[ext_resource type="AudioStream" uid="uid://ddvyfa717om0h" path="res://Sounds/AirDashUnlocked.mp3" id="6_xtr71"]
-[ext_resource type="AudioStream" uid="uid://ta84jl11ry5" path="res://Sounds/DoubleJumpUnlocked.mp3" id="7_771gl"]
-[ext_resource type="AudioStream" uid="uid://ct3kt8r8wbpla" path="res://Sounds/AscendEndingDialogue.mp3" id="8_xuvql"]
+[ext_resource type="AudioStream" uid="uid://coqi2s4lk054g" path="res://Sounds/Jump 1.wav" id="3_rydab"]
+[ext_resource type="AudioStream" uid="uid://bu7e53uu4vjcc" path="res://Sounds/Laser_shoot 1.wav" id="4_ye0h8"]
+[ext_resource type="AudioStream" uid="uid://btb1sucy4t841" path="res://Sounds/Pickup_coin 2.wav" id="5_bo5lm"]
+[ext_resource type="AudioStream" uid="uid://x4tt4w3v00l3" path="res://Sounds/AirDashUnlocked.mp3" id="6_xtr71"]
+[ext_resource type="AudioStream" uid="uid://chdntvevjc43h" path="res://Sounds/DoubleJumpUnlocked.mp3" id="7_771gl"]
+[ext_resource type="AudioStream" uid="uid://bvqbnojs2px0h" path="res://Sounds/AscendEndingDialogue.mp3" id="8_xuvql"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wm1ia"]
 
@@ -18,6 +18,7 @@ size = Vector3(1.521, 1.94824, 1.8916)
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_mask = 6
+floor_snap_length = 0.2
 script = ExtResource("1_qtton")
 jump_height = 3.0
 
@@ -30,6 +31,7 @@ shape = SubResource("CapsuleShape3D_ry65h")
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.1, 2.08165e-12)
+current = true
 
 [node name="PickupArea" type="Area3D" parent="Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.605158, -1.31023)
@@ -45,7 +47,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0689616, -0.383244, -1.426
 
 [node name="jump" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_rydab")
-volume_db = -17.111
+volume_db = -41.297
 
 [node name="pickup" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_bo5lm")
